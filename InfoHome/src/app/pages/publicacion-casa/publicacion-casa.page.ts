@@ -1,8 +1,13 @@
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
+import { PublicacionService } from './../../service/publicacion.service';
 import { Publicacion } from './../../interfaces/publicacion';
+import { Casa } from './../../interfaces/casa';
+import { Usuario } from './../../interfaces/usuario';
+import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { File } from '@ionic-native/file/ngx';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-publicacion-casa',
@@ -11,10 +16,60 @@ import { IonSlides } from '@ionic/angular';
 })
 export class PublicacionCasaPage implements OnInit {
   @ViewChild('slides', { static: true }) slides: IonSlides;
-  publicacion: Publicacion
   activeIndex: number = 0
+  publicacion: Publicacion
   imagen: string
-  constructor(private imgPicker: ImagePicker, private file: File) { }
+  imagenes: any[] = []
+  usuario: Usuario
+  formGroup: FormGroup
+  casa: Casa
+  constructor(private router: Router, private imgPicker: ImagePicker, private publicacionService: PublicacionService, private toastController: ToastController, private file: File, private formBuilder: FormBuilder,) { }
+  ngOnInit() {
+    this.buildForm();
+    this.mapearPublicacion();
+  }
+  volver() {
+    return this.router.dispose;
+  }
+  private buildForm() {
+    this.publicacion = new Publicacion();
+    this.publicacion.casa = new Casa();
+    this.publicacion.titulo = '';
+    this.publicacion.detalle = '';
+    this.publicacion.fecha = new Date();
+    this.publicacion.id = '';
+    this.publicacion.usuario = this.consultarUsuario();
+    this.publicacion.casa.barrio = '';
+    this.publicacion.casa.ciudad = '';
+    this.publicacion.casa.departamento = '';
+    this.publicacion.casa.direccion = '';
+    this.publicacion.casa.numeroDeBaños = '';
+    this.publicacion.casa.numeroDeCuartos = '';
+    this.publicacion.casa.tipo = '';
+    this.publicacion.casa.propietario = this.consultarUsuario();
+    this.formGroup = this.formBuilder.group({
+      titulo: [this.publicacion.titulo, Validators.required],
+      id: [this.publicacion.id, Validators.required],
+      fecha: [this.publicacion.fecha, Validators.required],
+      detalle: [this.publicacion.detalle, Validators.required],
+      barrio: [this.publicacion.casa.barrio, [Validators.required]],
+      ciudad: [this.publicacion.casa.ciudad, [Validators.required]],
+      departamento: [this.publicacion.casa.departamento, [Validators.required]],
+      direccion: [this.publicacion.casa.direccion, [Validators.required]],
+      numeroDeBaños: [this.publicacion.casa.numeroDeBaños, [Validators.required]],
+      numeroDeCuartos: [this.publicacion.casa.numeroDeCuartos, [Validators.required]],
+      tipo: [this.publicacion.casa.tipo, [Validators.required]],
+    })
+  }
+  get control() {
+    return this.formGroup.controls;
+  }
+  consultarUsuario() {
+    return this.usuario;
+  }
+  mapearPublicacion() {
+
+  }
   slideChanged() {
     this.slides.getActiveIndex().then(index => {
       this.activeIndex = index
@@ -111,8 +166,7 @@ export class PublicacionCasaPage implements OnInit {
       }
     }
   };
-  imagenes: any[] = []
-  ngOnInit() { }
+
   elegirVariasImagenes() {
     var options: ImagePickerOptions = {
       maximumImagesCount: 5,
@@ -132,7 +186,24 @@ export class PublicacionCasaPage implements OnInit {
     console.log(this.imagenes);
 
   }
+  onSubmit() {
+    if (this.formGroup.invalid) {
+      this.presentToast("Ingresa todos los datos para publicar tu casa!");
+      return;
+    }
+    this.guardarPublicacion();
+  }
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
+  }
   guardarPublicacion() {
-
+    this.publicacion = this.formGroup.value;
+    this.publicacionService.save(this.publicacion).subscribe((p) =>
+      this.publicacion = p
+    );
   }
 }

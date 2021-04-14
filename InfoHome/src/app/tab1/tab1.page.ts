@@ -11,7 +11,7 @@ import { Publicacion } from '../interfaces/publicacion';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-
+  constructor(private modalController: ModalController) { }
   fecha = new Date("06/11/2000")
   usuario: Usuario = {
     apellido: "Pontón",
@@ -21,7 +21,7 @@ export class Tab1Page {
     id: "123",
     telefono: "3121111133"
   }
-  imagenes: Imagen[] = []
+  imagenes: string[] = []
   publicaciones: Publicacion[] = [
     {
       casa: {
@@ -29,7 +29,10 @@ export class Tab1Page {
         numeroDeBaños: "3",
         numeroDeCuartos: "4",
         propietario: this.usuario,
-        tipo: "Arriendo"
+        tipo: "Arriendo",
+        departamento: "Cesar",
+        ciudad: "Valledupar",
+        barrio: "Mareigua"
       },
       detalle: "Apartamento en valledupar, ubicado en mareigua, cuenta con 4 alcobas, 3 baños, sala, comedor",
       fecha: this.fecha,
@@ -44,7 +47,10 @@ export class Tab1Page {
         numeroDeBaños: "3",
         numeroDeCuartos: "4",
         propietario: this.usuario,
-        tipo: "Arriendo"
+        tipo: "Arriendo",
+        departamento: "Cesar",
+        ciudad: "Valledupar",
+        barrio: "Mareigua"
       },
       detalle: "Apartamento en valledupar, ubicado en mareigua, cuenta con 4 alcobas, 3 baños, sala, comedor",
       fecha: this.fecha,
@@ -59,7 +65,10 @@ export class Tab1Page {
         numeroDeBaños: "3",
         numeroDeCuartos: "4",
         propietario: this.usuario,
-        tipo: "Arriendo"
+        tipo: "Arriendo",
+        departamento: "Cesar",
+        ciudad: "Valledupar",
+        barrio: "Mareigua"
       },
       detalle: "Apartamento en valledupar, ubicado en mareigua, cuenta con 4 alcobas, 3 baños, sala, comedor",
       fecha: this.fecha,
@@ -74,7 +83,10 @@ export class Tab1Page {
         numeroDeBaños: "3",
         numeroDeCuartos: "4",
         propietario: this.usuario,
-        tipo: "Arriendo"
+        tipo: "Arriendo",
+        departamento: "Cesar",
+        ciudad: "Valledupar",
+        barrio: "Mareigua"
       },
       detalle: "Apartamento en valledupar, ubicado en mareigua, cuenta con 4 alcobas, 3 baños, sala, comedor",
       fecha: this.fecha,
@@ -91,7 +103,10 @@ export class Tab1Page {
         numeroDeBaños: "3",
         numeroDeCuartos: "4",
         propietario: this.usuario,
-        tipo: "Arriendo"
+        tipo: "Arriendo",
+        departamento: "Cesar",
+        ciudad: "Valledupar",
+        barrio: "Mareigua"
       },
       detalle: "Apartamento en valledupar, ubicado en mareigua, cuenta con 4 alcobas, 3 baños, sala, comedor",
       fecha: this.fecha,
@@ -106,7 +121,10 @@ export class Tab1Page {
         numeroDeBaños: "3",
         numeroDeCuartos: "4",
         propietario: this.usuario,
-        tipo: "Arriendo"
+        tipo: "Arriendo",
+        departamento: "Cesar",
+        ciudad: "Valledupar",
+        barrio: "Mareigua"
       },
       detalle: "Apartamento en valledupar, ubicado en mareigua, cuenta con 4 alcobas, 3 baños, sala, comedor",
       fecha: this.fecha,
@@ -121,7 +139,10 @@ export class Tab1Page {
         numeroDeBaños: "3",
         numeroDeCuartos: "4",
         propietario: this.usuario,
-        tipo: "Arriendo"
+        tipo: "Arriendo",
+        departamento: "Cesar",
+        ciudad: "Valledupar",
+        barrio: "Mareigua"
       },
       detalle: "Apartamento en valledupar, ubicado en mareigua, cuenta con 4 alcobas, 3 baños, sala, comedor",
       fecha: this.fecha,
@@ -136,7 +157,10 @@ export class Tab1Page {
         numeroDeBaños: "3",
         numeroDeCuartos: "4",
         propietario: this.usuario,
-        tipo: "Arriendo"
+        tipo: "Arriendo",
+        departamento: "Cesar",
+        ciudad: "Valledupar",
+        barrio: "Mareigua"
       },
       detalle: "Apartamento en valledupar, ubicado en mareigua, cuenta con 4 alcobas, 3 baños, sala, comedor",
       fecha: this.fecha,
@@ -146,6 +170,5 @@ export class Tab1Page {
       imagenes: this.imagenes
     }
   ]
-  constructor(private modalController: ModalController) { }
 
 }

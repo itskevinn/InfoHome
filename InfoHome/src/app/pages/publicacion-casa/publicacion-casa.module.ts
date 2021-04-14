@@ -1,8 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { ComponentesModule } from './../../componentes/componentes.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -18,8 +19,10 @@ import { File } from '@ionic-native/file/ngx';
     IonicModule,
     PublicacionCasaPageRoutingModule,
     ComponentesModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [ImagePicker, File],
+  providers: [ImagePicker, File, HttpClient],
   declarations: [PublicacionCasaPage]
 })
 export class PublicacionCasaPageModule { }
