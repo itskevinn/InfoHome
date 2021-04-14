@@ -1,0 +1,17 @@
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\bin\Debug\net5.0\Service.deps.json
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\bin\Debug\net5.0\Service.dll
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\bin\Debug\net5.0\ref\Service.dll
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\bin\Debug\net5.0\Service.pdb
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\bin\Debug\net5.0\Data.dll
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\bin\Debug\net5.0\Entity.dll
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\bin\Debug\net5.0\Entity.pdb
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\bin\Debug\net5.0\Data.pdb
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\obj\Debug\net5.0\Service.csprojAssemblyReference.cache
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\obj\Debug\net5.0\Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\obj\Debug\net5.0\Service.AssemblyInfoInputs.cache
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\obj\Debug\net5.0\Service.AssemblyInfo.cs
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\obj\Debug\net5.0\Service.csproj.CoreCompileInputs.cache
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\obj\Debug\net5.0\Service.csproj.CopyComplete
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\obj\Debug\net5.0\Service.dll
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\obj\Debug\net5.0\ref\Service.dll
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\Service\obj\Debug\net5.0\Service.pdb

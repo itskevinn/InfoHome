@@ -1,0 +1,5 @@
+<ion-slides [options]="slideOpts">
+  <ion-slide (click)="verDetalle(publicacion)" *ngFor="let publicacion of publicaciones">
+    <app-cards-casa [publicacion]=publicacion></app-cards-casa>
+  </ion-slide>
+</ion-slides>

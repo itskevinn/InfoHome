@@ -1,0 +1,7 @@
+{
+  "name": "InfoHome",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
