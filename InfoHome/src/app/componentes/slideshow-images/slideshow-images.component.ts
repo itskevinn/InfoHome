@@ -14,6 +14,6 @@ export class SlideshowImagesComponent implements OnInit {
     initialSlide: 0,
     speed: 400,
     slidesPerView: 1,
-    freeMode: true,
+    freeMode: false,
   };
 }

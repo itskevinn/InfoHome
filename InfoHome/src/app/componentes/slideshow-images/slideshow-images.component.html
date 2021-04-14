@@ -1,5 +1,5 @@
-<ion-slides [options]="slideOpts">
-  <ion-slide *ngFor="let imagen of imagenes">
+<ion-card>
+  <ion-card-content *ngFor="let imagen of imagenes">
     <ion-img [src]="imagen"></ion-img>
-  </ion-slide>
-</ion-slides>
+  </ion-card-content>
+</ion-card>
