@@ -9,7 +9,11 @@ const routes: Routes = [
   {
     path: 'publicacion-casa',
     loadChildren: () => import('./pages/publicacion-casa/publicacion-casa.module').then( m => m.PublicacionCasaPageModule)
+  },  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   }
+
 ];
 @NgModule({
   imports: [
