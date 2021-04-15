@@ -1,0 +1,14 @@
+ionic cordova run browser
+
+Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
+
+dotnet tool install --global dotnet-ef
+dotnet ef migrations add InitialCreate -s ../NombrePresentacaion
+dotnet ef database update -s ../NombrePresentacion
+
+dotnet add package System.Data.SqlClient
+dotnet add package System.Collections
+
+nutged EntityFrameworkCore and EntityFramework.SqlServer datos versio 3.1.9
+EntityFrameworkCore.Tools presentation
+System.ComponentModel.Annotations Entity
