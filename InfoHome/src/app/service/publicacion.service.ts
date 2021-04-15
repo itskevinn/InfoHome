@@ -18,7 +18,6 @@ export class PublicacionService {
   ) { this.baseUrl = "https://localhost:5001/" }
 
   save(publicacion: Publicacion) {
-    publicacion.id = this.publicaciones.length.toString();
     publicacion.imagenes = this.darIdAImagenes(publicacion.imagenes, publicacion.id);
     console.log(publicacion.imagenes);
     return this.http.post<Publicacion>(this.baseUrl + "api/Publicacion", publicacion).pipe(

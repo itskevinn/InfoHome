@@ -1,5 +1,5 @@
 export class Imagen {
-  idImagen: string
+  codigoImagen: string
   idPublicacion: string
   valor: string
 }

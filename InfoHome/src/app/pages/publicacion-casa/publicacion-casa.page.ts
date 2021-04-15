@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { File } from '@ionic-native/file/ngx';
 import { IonSlides, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { randomInt } from 'crypto';
 
 @Component({
   selector: 'app-publicacion-casa',
@@ -207,8 +208,8 @@ export class PublicacionCasaPage implements OnInit {
           .lastIndexOf('/') + 1);
         this.file.readAsDataURL(path, fileName).then((base64string) => {
           this.imagen = new Imagen();
-          this.imagen.idImagen = path
-          this.imagen.idPublicacion = this.publicacion.id
+          this.imagen.codigoImagen = randomInt(10).toString()
+          this.imagen.idPublicacion = randomInt(10).toString();
           this.imagen.valor = base64string;
           this.imagenes.push(this.imagen)
         })
@@ -247,6 +248,6 @@ export class PublicacionCasaPage implements OnInit {
       this.publicacion = p
     );
     console.log(this.publicacion);
-    
+
   }
 }
