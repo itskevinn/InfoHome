@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ModalController } from '@ionic/angular';
+
+import { RegistrarUsuarioComponent } from 'src/app/componentes/registrar-usuario/registrar-usuario.component';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -7,11 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  constructor( private modalController: ModalController ) { }
 
   ngOnInit() {
   }
 
   onClick(){}
-  onRegistrar(){}
+
+  async onRegistrar() {
+    const modal = await this.modalController.create({
+      component: RegistrarUsuarioComponent,
+      componentProps: { }
+    });
+    modal.present();
+  }
 }
