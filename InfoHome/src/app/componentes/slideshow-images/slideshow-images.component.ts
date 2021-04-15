@@ -1,3 +1,4 @@
+import { Imagen } from './../../interfaces/imagen';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -6,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./slideshow-images.component.scss'],
 })
 export class SlideshowImagesComponent implements OnInit {
-  @Input() imagenes: string[]
+  @Input() imagenes: Imagen[]
   constructor() { }
 
   ngOnInit() { }

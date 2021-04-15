@@ -4,6 +4,8 @@ namespace Entity
   public class Casa
   {
     [Key]
+    [Required(ErrorMessage = "Esta casa ya se encuentra registrada")]
+    public string Id { get; set; }
     [Required(ErrorMessage = "Ingrese la dirección de la casa")]
     public string Dirección { get; set; }
     [Required(ErrorMessage = "Ingrese el número de cuartos")]

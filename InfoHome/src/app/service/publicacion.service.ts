@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { tap, catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Publicacion } from '../interfaces/publicacion';
+import { Imagen } from '../interfaces/imagen';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -18,10 +19,18 @@ export class PublicacionService {
 
   save(publicacion: Publicacion) {
     publicacion.id = this.publicaciones.length.toString();
+    publicacion.imagenes = this.darIdAImagenes(publicacion.imagenes, publicacion.id);
+    console.log(publicacion.imagenes);
     return this.http.post<Publicacion>(this.baseUrl + "api/Publicacion", publicacion).pipe(
       tap((_) => this.updateWhenSaved(),
       ),
     );
+  }
+  darIdAImagenes(imagenes: Imagen[], id: string) {
+    imagenes.forEach(img => {
+      img.idPublicacion = id + imagenes.length + 1
+    });
+    return imagenes;
   }
   updateWhenSaved() {
     this.gets();

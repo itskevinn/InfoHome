@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Entity
@@ -14,6 +15,7 @@ namespace Entity
     public DateTime Fecha { get; set; }
     public Casa Casa { get; set; }
     public Usuario Usuario { get; set; }
+    public List<Imagen> Imagenes { get; set; }
 
   }
 }

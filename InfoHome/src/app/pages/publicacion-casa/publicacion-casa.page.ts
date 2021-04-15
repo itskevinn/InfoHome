@@ -1,3 +1,4 @@
+import { Imagen } from './../../interfaces/imagen';
 import { PublicacionService } from './../../service/publicacion.service';
 import { Publicacion } from './../../interfaces/publicacion';
 import { Casa } from './../../interfaces/casa';
@@ -17,55 +18,81 @@ import { Router } from '@angular/router';
 export class PublicacionCasaPage implements OnInit {
   @ViewChild('slides', { static: true }) slides: IonSlides;
   activeIndex: number = 0
+  departamentos: string[] = ["Cesar", "Guajira"]
+  ciudades: string[]
   publicacion: Publicacion
-  imagen: string
-  imagenes: any[] = []
+  ciudad: string
+  imagen: Imagen
+  tipo: string
+  imagenes: Imagen[] = []
   usuario: Usuario
+  tipos: string[] = ["Arriendo", "Venta"]
   formGroup: FormGroup
   casa: Casa
+  departamento: string
   constructor(private router: Router, private imgPicker: ImagePicker, private publicacionService: PublicacionService, private toastController: ToastController, private file: File, private formBuilder: FormBuilder,) { }
   ngOnInit() {
     this.buildForm();
     this.mapearPublicacion();
   }
+  validarCiudades(departamento: string) {
+    if (departamento == "Cesar") {
+      this.ciudades = ["Valledupar", "Pueblo Bello"]
+      return;
+    }
+    this.ciudades = ["Rioacha", "Maicao"]
+  }
+  cambiarTipo(value) {
+    this.tipo = value;
+  }
   volver() {
     return this.router.dispose;
   }
+  cambiarDepartamento(value) {
+    this.departamento = value
+    this.validarCiudades(this.departamento);
+  }
+  cambiarCiudad(value) {
+    this.ciudad = value
+  }
   private buildForm() {
     this.publicacion = new Publicacion();
-    this.publicacion.casa = new Casa();
+    this.casa = new Casa()
     this.publicacion.titulo = '';
     this.publicacion.detalle = '';
-    this.publicacion.fecha = new Date();
-    this.publicacion.id = '';
     this.publicacion.usuario = this.consultarUsuario();
-    this.publicacion.casa.barrio = '';
-    this.publicacion.casa.ciudad = '';
-    this.publicacion.casa.departamento = '';
-    this.publicacion.casa.direccion = '';
-    this.publicacion.casa.numeroDeBaños = '';
-    this.publicacion.casa.numeroDeCuartos = '';
-    this.publicacion.casa.tipo = '';
-    this.publicacion.casa.propietario = this.consultarUsuario();
+    this.casa.barrio = '';
+    this.casa.ciudad = '';
+    this.casa.departamento = '';
+    this.casa.direccion = '';
+    this.casa.numeroDeBanos = '';
+    this.casa.numeroDeCuartos = '';
+    this.casa.tipo = '';
+    this.casa.propietario = this.consultarUsuario();
     this.formGroup = this.formBuilder.group({
       titulo: [this.publicacion.titulo, Validators.required],
-      id: [this.publicacion.id, Validators.required],
-      fecha: [this.publicacion.fecha, Validators.required],
       detalle: [this.publicacion.detalle, Validators.required],
-      barrio: [this.publicacion.casa.barrio, [Validators.required]],
-      ciudad: [this.publicacion.casa.ciudad, [Validators.required]],
-      departamento: [this.publicacion.casa.departamento, [Validators.required]],
-      direccion: [this.publicacion.casa.direccion, [Validators.required]],
-      numeroDeBaños: [this.publicacion.casa.numeroDeBaños, [Validators.required]],
-      numeroDeCuartos: [this.publicacion.casa.numeroDeCuartos, [Validators.required]],
-      tipo: [this.publicacion.casa.tipo, [Validators.required]],
+      barrio: [this.casa.barrio, [Validators.required]],
+      ciudad: [this.casa.ciudad, [Validators.required]],
+      departamento: [this.casa.departamento, [Validators.required]],
+      direccion: [this.casa.direccion, [Validators.required]],
+      numeroDeBanos: [this.casa.numeroDeBanos, [Validators.required]],
+      numeroDeCuartos: [this.casa.numeroDeCuartos, [Validators.required]],
+      tipo: [this.casa.tipo, [Validators.required]]
     })
   }
   get control() {
     return this.formGroup.controls;
   }
   consultarUsuario() {
-    return this.usuario;
+    let usuario = new Usuario()
+    usuario.id = '123';
+    usuario.apellido = "Pontón";
+    usuario.nombre = "Kevin"
+    usuario.correo = " kvin@gmail.com"
+    usuario.fechaNacimiento = new Date("06/11/2000");
+    usuario.telefono = "3102999911"
+    return usuario;
   }
   mapearPublicacion() {
 
@@ -179,7 +206,11 @@ export class PublicacionCasaPage implements OnInit {
         let path = r[i].substring(0, r[i]
           .lastIndexOf('/') + 1);
         this.file.readAsDataURL(path, fileName).then((base64string) => {
-          this.imagenes.push(base64string);
+          this.imagen = new Imagen();
+          this.imagen.idImagen = path
+          this.imagen.idPublicacion = this.publicacion.id
+          this.imagen.valor = base64string;
+          this.imagenes.push(this.imagen)
         })
       }
     })
@@ -201,9 +232,21 @@ export class PublicacionCasaPage implements OnInit {
     toast.present();
   }
   guardarPublicacion() {
+    this.casa = new Casa()
     this.publicacion = this.formGroup.value;
+    this.casa.tipo = this.formGroup.value.tipo;
+    this.casa.ciudad = this.ciudad;
+    this.casa.departamento = this.departamento;
+    this.casa.barrio = this.formGroup.value.barrio;
+    this.casa.direccion = this.formGroup.value.direccion;
+    this.casa.numeroDeBanos = this.formGroup.value.numeroDeBanos;
+    this.casa.numeroDeCuartos = this.formGroup.value.numeroDeCuartos;
+    this.casa.propietario = this.consultarUsuario();
+    this.publicacion.imagenes = this.imagenes;
     this.publicacionService.save(this.publicacion).subscribe((p) =>
       this.publicacion = p
     );
+    console.log(this.publicacion);
+    
   }
 }

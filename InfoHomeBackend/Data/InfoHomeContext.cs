@@ -11,7 +11,8 @@ namespace Data
 
     }
     public DbSet<Casa> Casas { get; set; }
-    public DbSet<Transaccion> Transacciones { get; set; }
+    public DbSet<Imagen> Imagenes { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Publicacion> Publicaciones { get; set; }
   }
 }

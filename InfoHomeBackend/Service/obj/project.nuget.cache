@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mZLG6kPrOXG9EAKxie1G4xE5TBJGvSGYMYI7bGsZEBEQ/jmE+UneOKIZZ3BN0zRCeh/aHo2M4AlPIU6UgG2SWg==",
+  "dgSpecHash": "xyCOstShdyUXHMtWWmYLI6gcsxuFqCbsTUd8focTFEc/1gijNzD9UAOGxhXGpAm40zHKMo6CmIPmqxQPynAjMQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\InfoHome\\Service\\Service.csproj",
+  "projectFilePath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\InfoHome\\InfoHomeBackend\\Service\\Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kevin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\kevin\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

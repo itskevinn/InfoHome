@@ -24,7 +24,6 @@ namespace InfoHomeApi.Models
         FechaNacimiento = usuario.FechaNacimiento;
       }
       public List<Casa> Casas { get; set; }
-      public List<Transaccion> Transacciones { get; set; }
       public List<Publicacion> Publicaciones { get; set; }
     }
   }

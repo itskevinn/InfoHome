@@ -1,3 +1,4 @@
+import { Imagen } from './imagen';
 import { Casa } from './casa';
 import { Usuario } from './usuario';
 export class Publicacion {
@@ -6,6 +7,6 @@ export class Publicacion {
   id: string
   fecha: Date
   usuario: Usuario
-  imagenes: string[]
+  imagenes: Imagen[]
   casa: Casa
 }
