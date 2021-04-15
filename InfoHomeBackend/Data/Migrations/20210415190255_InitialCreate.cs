@@ -53,21 +53,21 @@ namespace Data.Migrations
                     Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Detalle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CasaId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UsuarioId = table.Column<string>(type: "nvarchar(30)", nullable: true)
+                    IdCasa = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    IdUsuario = table.Column<string>(type: "nvarchar(30)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Publicaciones", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Publicaciones_Casas_CasaId",
-                        column: x => x.CasaId,
+                        name: "FK_Publicaciones_Casas_IdCasa",
+                        column: x => x.IdCasa,
                         principalTable: "Casas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Publicaciones_Usuarios_UsuarioId",
-                        column: x => x.UsuarioId,
+                        name: "FK_Publicaciones_Usuarios_IdUsuario",
+                        column: x => x.IdUsuario,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -104,14 +104,14 @@ namespace Data.Migrations
                 column: "PublicacionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Publicaciones_CasaId",
+                name: "IX_Publicaciones_IdCasa",
                 table: "Publicaciones",
-                column: "CasaId");
+                column: "IdCasa");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Publicaciones_UsuarioId",
+                name: "IX_Publicaciones_IdUsuario",
                 table: "Publicaciones",
-                column: "UsuarioId");
+                column: "IdUsuario");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

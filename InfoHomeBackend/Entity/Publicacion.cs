@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity
 {
@@ -12,7 +13,11 @@ namespace Entity
     [Key]
     public string Id { get; set; }
     public DateTime Fecha { get; set; }
+    public string IdCasa { get; set; }
+    [NotMapped]
     public Casa Casa { get; set; }
+    public string IdUsuario { get; set; }
+    [NotMapped]
     public Usuario Usuario { get; set; }
     public List<Imagen> Imagenes { get; set; }
 

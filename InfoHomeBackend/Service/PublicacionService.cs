@@ -13,10 +13,12 @@ namespace Service
   {
     private InfoHomeContext _infoHomeContext;
     private ImagenService _imgService;
+    private CasaService _casaService;
     public PublicacionService(InfoHomeContext infoHomeContext)
     {
       _infoHomeContext = infoHomeContext;
       _imgService = new ImagenService(infoHomeContext);
+      _casaService = new CasaService(infoHomeContext);
     }
     private static Random random = new Random();
     public static string RandomString(int length)
@@ -37,7 +39,8 @@ namespace Service
           return new GuardarPublicacionResponse("Publicacion ya registrada");
         }
         GenerarCodigoImagen(publicacion);
-        _infoHomeContext.Add(publicacion);
+        GenerarCodigoCasa(publicacion.Casa);
+        _infoHomeContext.Publicaciones.Add(publicacion);
         _infoHomeContext.SaveChanges();
         return new GuardarPublicacionResponse(publicacion, "Publicacion guardada exitosamente");
       }
@@ -46,7 +49,10 @@ namespace Service
         return new GuardarPublicacionResponse(e.Message);
       }
     }
-
+    private static void GenerarCodigoCasa(Casa casa)
+    {
+      casa.Id = RandomString(14);
+    }
     private static void GenerarCodigoImagen(Publicacion publicacion)
     {
       foreach (var imagen in publicacion.Imagenes)

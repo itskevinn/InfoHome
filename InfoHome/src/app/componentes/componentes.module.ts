@@ -1,3 +1,4 @@
+import { RegistrarUsuarioComponent } from './registrar-usuario/registrar-usuario.component';
 import { HeaderPublicacionComponent } from './header-publicacion/header-publicacion.component';
 import { SlideshowImagesComponent } from './slideshow-images/slideshow-images.component';
 import { InsertarImagenCardComponent } from './insertar-imagen-card/insertar-imagen-card.component';
@@ -14,7 +15,7 @@ import { SlideshowBackdropComponent } from './slideshow-backdrop/slideshow-backd
 
 
 @NgModule({
-  declarations: [SlideshowBackdropComponent, CardsCasaComponent, SlideshowDetailsImagesComponent, DetalleComponent, HeaderBackButtonComponent, HeaderComponent, InsertarImagenCardComponent, SlideshowImagesComponent, HeaderPublicacionComponent],
+  declarations: [SlideshowBackdropComponent, CardsCasaComponent, SlideshowDetailsImagesComponent, DetalleComponent, HeaderBackButtonComponent, HeaderComponent, InsertarImagenCardComponent, SlideshowImagesComponent, HeaderPublicacionComponent, RegistrarUsuarioComponent],
   imports: [
     CommonModule, IonicModule
   ],

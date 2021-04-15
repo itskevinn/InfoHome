@@ -1,15 +1,15 @@
+import { RegistroCasaPage } from './../registro-casa/registro-casa.page';
 import { Imagen } from './../../interfaces/imagen';
 import { PublicacionService } from './../../service/publicacion.service';
 import { Publicacion } from './../../interfaces/publicacion';
-import { Casa } from './../../interfaces/casa';
 import { Usuario } from './../../interfaces/usuario';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { File } from '@ionic-native/file/ngx';
-import { IonSlides, ToastController } from '@ionic/angular';
+import { IonSlides, ToastController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { randomInt } from 'crypto';
+import { Casa } from 'src/app/interfaces/casa';
 
 @Component({
   selector: 'app-publicacion-casa',
@@ -19,85 +19,90 @@ import { randomInt } from 'crypto';
 export class PublicacionCasaPage implements OnInit {
   @ViewChild('slides', { static: true }) slides: IonSlides;
   activeIndex: number = 0
-  departamentos: string[] = ["Cesar", "Guajira"]
-  ciudades: string[]
   publicacion: Publicacion
-  ciudad: string
   imagen: Imagen
-  tipo: string
   imagenes: Imagen[] = []
   usuario: Usuario
-  tipos: string[] = ["Arriendo", "Venta"]
+  fecha = new Date()
   formGroup: FormGroup
-  casa: Casa
-  departamento: string
-  constructor(private router: Router, private imgPicker: ImagePicker, private publicacionService: PublicacionService, private toastController: ToastController, private file: File, private formBuilder: FormBuilder,) { }
+  constructor(public modalController: ModalController, private storage: Storage, private router: Router, private imgPicker: ImagePicker, private publicacionService: PublicacionService, private toastController: ToastController, private file: File, private formBuilder: FormBuilder) {
+
+  }
   ngOnInit() {
     this.buildForm();
-    this.mapearPublicacion();
   }
-  validarCiudades(departamento: string) {
-    if (departamento == "Cesar") {
-      this.ciudades = ["Valledupar", "Pueblo Bello"]
-      return;
-    }
-    this.ciudades = ["Rioacha", "Maicao"]
+  cambiarCasa(id: string) {
+
   }
-  cambiarTipo(value) {
-    this.tipo = value;
+  async abrirRegistro() {
+    const modal = await this.modalController.create({
+      component: RegistroCasaPage,
+    });
+    return await modal.present();
   }
   volver() {
     return this.router.dispose;
   }
-  cambiarDepartamento(value) {
-    this.departamento = value
-    this.validarCiudades(this.departamento);
-  }
-  cambiarCiudad(value) {
-    this.ciudad = value
-  }
+
   private buildForm() {
     this.publicacion = new Publicacion();
-    this.casa = new Casa()
     this.publicacion.titulo = '';
     this.publicacion.detalle = '';
     this.publicacion.usuario = this.consultarUsuario();
-    this.casa.barrio = '';
-    this.casa.ciudad = '';
-    this.casa.departamento = '';
-    this.casa.direccion = '';
-    this.casa.numeroDeBanos = '';
-    this.casa.numeroDeCuartos = '';
-    this.casa.tipo = '';
-    this.casa.propietario = this.consultarUsuario();
+    console.log(this.consultarUsuario());
+
     this.formGroup = this.formBuilder.group({
       titulo: [this.publicacion.titulo, Validators.required],
       detalle: [this.publicacion.detalle, Validators.required],
-      barrio: [this.casa.barrio, [Validators.required]],
-      ciudad: [this.casa.ciudad, [Validators.required]],
-      departamento: [this.casa.departamento, [Validators.required]],
-      direccion: [this.casa.direccion, [Validators.required]],
-      numeroDeBanos: [this.casa.numeroDeBanos, [Validators.required]],
-      numeroDeCuartos: [this.casa.numeroDeCuartos, [Validators.required]],
-      tipo: [this.casa.tipo, [Validators.required]]
     })
   }
   get control() {
     return this.formGroup.controls;
   }
   consultarUsuario() {
-    let usuario = new Usuario()
-    usuario.id = '123';
-    usuario.apellido = "Pontón";
-    usuario.nombre = "Kevin"
-    usuario.correo = " kvin@gmail.com"
-    usuario.fechaNacimiento = new Date("06/11/2000");
-    usuario.telefono = "3102999911"
-    return usuario;
-  }
-  mapearPublicacion() {
+    this.storage.get('usuarioLogeado').then(u => this.usuario = u)
+    console.log(this.usuario);
 
+    return this.usuario;
   }
+  /*
+    consultarUsuario() {
+      let usuario = new Usuario()
+      usuario.id = '123';
+      usuario.apellido = "Pontón";
+      usuario.nombre = "Kevin"
+      usuario.correo = " kvin@gmail.com"
+      usuario.fechaNacimiento = new Date("06/11/2000");
+      usuario.telefono = "3102999911";
+      usuario.casas = this.construirListaCasas();
+      return usuario;
+    }
+    construirListaCasas() {
+      let casas =
+        [{
+          barrio: "Mareiga",
+          ciudad: "Valledupar",
+          departamento: "Cesar",
+          direccion: "Calle 64 # 02 - 1",
+          numeroDeBanos: "5",
+          numeroDeCuartos: "6",
+          idPropietario: "123",
+          tipo: "Venta",
+          propietario: {
+            apellido: "Pontón",
+            nombre: "Kevin",
+            correo: "Kevin@gmail.com",
+            fechaNacimiento: this.fecha,
+            id: "123",
+            telefono: "3121111133",
+            casas: []
+          },
+        }
+        ]
+      return casas
+    }
+    */
+
   slideChanged() {
     this.slides.getActiveIndex().then(index => {
       this.activeIndex = index
@@ -208,8 +213,8 @@ export class PublicacionCasaPage implements OnInit {
           .lastIndexOf('/') + 1);
         this.file.readAsDataURL(path, fileName).then((base64string) => {
           this.imagen = new Imagen();
-          this.imagen.codigoImagen = randomInt(10).toString()
-          this.imagen.idPublicacion = randomInt(10).toString();
+          this.imagen.codigoImagen = '1';
+          this.imagen.idPublicacion = '1';
           this.imagen.valor = base64string;
           this.imagenes.push(this.imagen)
         })
@@ -233,16 +238,7 @@ export class PublicacionCasaPage implements OnInit {
     toast.present();
   }
   guardarPublicacion() {
-    this.casa = new Casa()
     this.publicacion = this.formGroup.value;
-    this.casa.tipo = this.formGroup.value.tipo;
-    this.casa.ciudad = this.ciudad;
-    this.casa.departamento = this.departamento;
-    this.casa.barrio = this.formGroup.value.barrio;
-    this.casa.direccion = this.formGroup.value.direccion;
-    this.casa.numeroDeBanos = this.formGroup.value.numeroDeBanos;
-    this.casa.numeroDeCuartos = this.formGroup.value.numeroDeCuartos;
-    this.casa.propietario = this.consultarUsuario();
     this.publicacion.imagenes = this.imagenes;
     this.publicacionService.save(this.publicacion).subscribe((p) =>
       this.publicacion = p

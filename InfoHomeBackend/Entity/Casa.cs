@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Entity
 {
   public class Casa
@@ -13,7 +15,9 @@ namespace Entity
     [Required(ErrorMessage = "Ingrese el número de baños")]
     public string NúmeroDeBaños { get; set; }
     [Required(ErrorMessage = "Se necesita registrar al propietario de la casa")]
+    [NotMapped]
     public Usuario Propietario { get; set; }
+    public string IdPropietario { get; set; }
     [Required(ErrorMessage = "Seleccione un tipo: Arriendo, Venta")]
     [TipoValidacion(ErrorMessage = "Seleccione un tipo válido")]
     public string Tipo { get; set; }

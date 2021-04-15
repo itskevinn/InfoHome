@@ -8,5 +8,7 @@ export class Publicacion {
   fecha: Date
   usuario: Usuario
   imagenes: Imagen[]
+  idUsuario: string
+  idCasa: string
   casa: Casa
 }

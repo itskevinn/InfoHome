@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(InfoHomeContext))]
-    [Migration("20210415034444_InitialCreate")]
+    [Migration("20210415190255_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,27 +78,27 @@ namespace Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CasaId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Detalle")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("IdCasa")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("IdUsuario")
+                        .HasColumnType("nvarchar(30)");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("nvarchar(30)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CasaId");
+                    b.HasIndex("IdCasa");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("Publicaciones");
                 });
@@ -153,17 +153,13 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Entity.Publicacion", b =>
                 {
-                    b.HasOne("Entity.Casa", "Casa")
+                    b.HasOne("Entity.Casa", null)
                         .WithMany()
-                        .HasForeignKey("CasaId");
+                        .HasForeignKey("IdCasa");
 
-                    b.HasOne("Entity.Usuario", "Usuario")
+                    b.HasOne("Entity.Usuario", null)
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
-
-                    b.Navigation("Casa");
-
-                    b.Navigation("Usuario");
+                        .HasForeignKey("IdUsuario");
                 });
 
             modelBuilder.Entity("Entity.Publicacion", b =>

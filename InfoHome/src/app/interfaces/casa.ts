@@ -6,6 +6,7 @@ export class Casa {
   ciudad: string
   barrio: string
   numeroDeBanos: string
+  idPropietario: string
   propietario: Usuario
   tipo: string
 }
