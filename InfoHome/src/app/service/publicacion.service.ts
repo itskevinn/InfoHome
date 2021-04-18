@@ -3,6 +3,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Publicacion } from '../interfaces/publicacion';
 import { Imagen } from '../interfaces/imagen';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -25,7 +26,7 @@ export class PublicacionService {
       ),
     );
   }
-  
+
   getByType(tipo: string) {
     const url = `${this.baseUrl}/api/PublicacionTipo/${tipo}`
     return this.http.get<Publicacion[]>(url).pipe(
@@ -34,6 +35,16 @@ export class PublicacionService {
       }),
     );
   }
+
+  getsBySearch(search: string){
+    const url = `${this.baseUrl}/api/PublicacionSearch/${search}`;
+    return this.http.get<Publicacion[]>(url).pipe(
+      tap((p) => {
+        this.publicaciones = p;
+      }),
+    );
+  }
+
   darIdAImagenes(imagenes: Imagen[], id: string) {
     imagenes.forEach(img => {
       img.idPublicacion = id + imagenes.length + 1

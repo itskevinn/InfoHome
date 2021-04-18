@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage';
 })
 export class LoginPage implements OnInit {
   usuario: Usuario
-  USUARIOID: string = 'S5ZDT0Y7665S3R'
+  USUARIOID: string = 'ECNRVCQQ30B80G'
   constructor(private modalController: ModalController, private usuarioService: UsuarioService, private storage: Storage) { }
 
   ngOnInit() {

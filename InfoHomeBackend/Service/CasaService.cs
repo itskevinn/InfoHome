@@ -46,6 +46,25 @@ namespace Service
       casas = _infoHomeContext.Casas.Where(c => c.IdUsuario == idUsuario).ToList();
       return casas;
     }
+
+    public Casa ConsultarCasasIdCasas(string Id)
+    {
+      Casa casa = new Casa();
+      casa = _infoHomeContext.Casas.First(c => c.Id == Id);
+      return casa;
+    }
+    public bool ConsultarCasasSearch(string search, string idCasa)
+    {
+      Casa casa = ConsultarCasasIdCasas(idCasa);
+
+      if(casa.Departamento == search){
+        return true;
+      }else if(casa.Ciudad == search){
+        return true;
+      }
+      return false;
+    }
+
     public List<Casa> ConsultarCasas()
     {
       return _infoHomeContext.Casas.ToList();
