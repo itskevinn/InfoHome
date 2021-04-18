@@ -14,12 +14,6 @@ namespace Service
     private InfoHomeContext _infoHomeContext;
     private ImagenService _imgService;
     private CasaService _casaService;
-    public PublicacionService(InfoHomeContext infoHomeContext)
-    {
-      _infoHomeContext = infoHomeContext;
-      _imgService = new ImagenService(infoHomeContext);
-      _casaService = new CasaService(infoHomeContext);
-    }
     private static Random random = new Random();
     public static string RandomString(int length)
     {
@@ -27,19 +21,27 @@ namespace Service
       return new string(Enumerable.Repeat(chars, length)
         .Select(s => s[random.Next(s.Length)]).ToArray());
     }
+    public PublicacionService(InfoHomeContext infoHomeContext)
+    {
+      _infoHomeContext = infoHomeContext;
+      _imgService = new ImagenService(infoHomeContext);
+      _casaService = new CasaService(infoHomeContext);
+    }
+
     public GuardarPublicacionResponse Guardar(Publicacion publicacion)
     {
       try
       {
         string id = RandomString(15);
         publicacion.Id = id;
+
         var publicacionBuscada = _infoHomeContext.Publicaciones.Find(publicacion.Id);
         if (publicacionBuscada != null)
         {
           return new GuardarPublicacionResponse("Publicacion ya registrada");
         }
         GenerarCodigoImagen(publicacion);
-        GenerarCodigoCasa(publicacion.Casa);
+        publicacion.IdCasa = GenerarCodigoCasa();
         _infoHomeContext.Publicaciones.Add(publicacion);
         _infoHomeContext.SaveChanges();
         return new GuardarPublicacionResponse(publicacion, "Publicacion guardada exitosamente");
@@ -49,9 +51,15 @@ namespace Service
         return new GuardarPublicacionResponse(e.Message);
       }
     }
-    private static void GenerarCodigoCasa(Casa casa)
+    public List<Publicacion> ConsultarPublicacionUsuario(string idUsuario)
     {
-      casa.Id = RandomString(14);
+      List<Publicacion> publicaciones = new List<Publicacion>();
+      publicaciones = _infoHomeContext.Publicaciones.Where(p => p.IdUsuario == idUsuario).ToList();
+      return publicaciones;
+    }
+    private static string GenerarCodigoCasa()
+    {
+      return RandomString(14);
     }
     private static void GenerarCodigoImagen(Publicacion publicacion)
     {
@@ -72,9 +80,9 @@ namespace Service
           publicacionVieja.Id = publicacionNueva.Id;
           publicacionVieja.Titulo = publicacionNueva.Titulo;
           publicacionVieja.Detalle = publicacionNueva.Detalle;
-          publicacionVieja.Casa = publicacionNueva.Casa;
+          publicacionVieja.IdCasa = publicacionNueva.IdCasa;
           publicacionVieja.Fecha = publicacionNueva.Fecha;
-          publicacionVieja.Usuario = publicacionNueva.Usuario;
+          publicacionVieja.IdUsuario = publicacionNueva.IdUsuario;
           publicacionVieja.Imagenes = publicacionNueva.Imagenes;
           _infoHomeContext.Publicaciones.Update(publicacionVieja);
           _infoHomeContext.SaveChanges();
@@ -95,6 +103,18 @@ namespace Service
       try
       {
         return _infoHomeContext.Publicaciones.Include((p) => p.Imagenes).ToList();
+
+      }
+      catch (Exception)
+      {
+        throw;
+      }
+    }
+    public List<Publicacion> ConsultarPorTipo(string tipo)
+    {
+      try
+      {
+        return _infoHomeContext.Publicaciones.Where((p) => p.Tipo == tipo).ToList();
 
       }
       catch (Exception)

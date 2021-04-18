@@ -1,3 +1,5 @@
+import { CasaService } from 'src/app/service/casa.service';
+import { BehaviorSubject } from 'rxjs';
 import { RegistroCasaPage } from './../registro-casa/registro-casa.page';
 import { Imagen } from './../../interfaces/imagen';
 import { PublicacionService } from './../../service/publicacion.service';
@@ -9,7 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { File } from '@ionic-native/file/ngx';
 import { IonSlides, ToastController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Casa } from 'src/app/interfaces/casa';
+import { Casa } from 'src/app/interfaces/casa'; 3
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-publicacion-casa',
@@ -23,16 +26,30 @@ export class PublicacionCasaPage implements OnInit {
   imagen: Imagen
   imagenes: Imagen[] = []
   usuario: Usuario
+  tipo: string
+  tipos: string[] = ["Arriendo", "Venta"]
+  casas: Casa[]
+  casa: Casa
+  currentUserSubject: any
   fecha = new Date()
   formGroup: FormGroup
-  constructor(public modalController: ModalController, private storage: Storage, private router: Router, private imgPicker: ImagePicker, private publicacionService: PublicacionService, private toastController: ToastController, private file: File, private formBuilder: FormBuilder) {
+  constructor(public modalController: ModalController, private casaService: CasaService, private storage: Storage, private router: Router, private imgPicker: ImagePicker, private publicacionService: PublicacionService, private toastController: ToastController, private file: File, private formBuilder: FormBuilder) {
 
   }
   ngOnInit() {
     this.buildForm();
   }
-  cambiarCasa(id: string) {
-
+  cambiarCasa(value) {
+    this.casa = value
+  }
+  cambiarTipo(value) {
+    this.tipo = value;
+  }
+  cargarCasas() {
+    console.log(this.usuario);
+    this.casaService.getsByUser(this.usuario.id).subscribe((c) => {
+      this.casas = c
+    });
   }
   async abrirRegistro() {
     const modal = await this.modalController.create({
@@ -43,14 +60,22 @@ export class PublicacionCasaPage implements OnInit {
   volver() {
     return this.router.dispose;
   }
-
+  async getUser() {
+    await this.cargarUsuario();
+    return this.currentUserSubject.asObservable();
+  }
   private buildForm() {
     this.publicacion = new Publicacion();
+    this.publicacion.usuario = new Usuario();
     this.publicacion.titulo = '';
     this.publicacion.detalle = '';
-    this.publicacion.usuario = this.consultarUsuario();
-    console.log(this.consultarUsuario());
-
+    this.getUser().then((u) => {
+      u.subscribe((r) => {
+        this.publicacion.usuario = r;
+        this.usuario = r
+        console.log(r)
+      });
+    });
     this.formGroup = this.formBuilder.group({
       titulo: [this.publicacion.titulo, Validators.required],
       detalle: [this.publicacion.detalle, Validators.required],
@@ -60,10 +85,18 @@ export class PublicacionCasaPage implements OnInit {
     return this.formGroup.controls;
   }
   consultarUsuario() {
-    this.storage.get('usuarioLogeado').then(u => this.usuario = u)
+    this.storage.get('usuarioLogeado').then((u) => {
+      this.usuario = u;
+    });
     console.log(this.usuario);
-
     return this.usuario;
+  }
+  async cargarUsuario() {
+    const usuario = await this.storage.get('usuarioLogeado');
+    if (usuario) {
+      this.currentUserSubject = new BehaviorSubject<Usuario>(usuario);
+    }
+    return;
   }
   /*
     consultarUsuario() {
@@ -240,6 +273,9 @@ export class PublicacionCasaPage implements OnInit {
   guardarPublicacion() {
     this.publicacion = this.formGroup.value;
     this.publicacion.imagenes = this.imagenes;
+    this.publicacion.idCasa = this.casa.id
+    this.publicacion.idUsuario = this.usuario.id;
+    this.publicacion.tipo = this.tipo;
     this.publicacionService.save(this.publicacion).subscribe((p) =>
       this.publicacion = p
     );

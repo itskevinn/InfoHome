@@ -28,18 +28,21 @@ namespace Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Dirección = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NúmeroDeCuartos = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NúmeroDeBaños = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PropietarioId = table.Column<string>(type: "nvarchar(30)", nullable: true),
-                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NumeroDeCuartos = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumeroDeBanos = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Departamento = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Barrio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UsuarioId = table.Column<string>(type: "nvarchar(30)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Casas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Casas_Usuarios_PropietarioId",
-                        column: x => x.PropietarioId,
+                        name: "FK_Casas_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -51,23 +54,19 @@ namespace Data.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Detalle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdCasa = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    IdUsuario = table.Column<string>(type: "nvarchar(30)", nullable: true)
+                    IdCasa = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UsuarioId = table.Column<string>(type: "nvarchar(30)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Publicaciones", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Publicaciones_Casas_IdCasa",
-                        column: x => x.IdCasa,
-                        principalTable: "Casas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Publicaciones_Usuarios_IdUsuario",
-                        column: x => x.IdUsuario,
+                        name: "FK_Publicaciones_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -94,9 +93,9 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Casas_PropietarioId",
+                name: "IX_Casas_UsuarioId",
                 table: "Casas",
-                column: "PropietarioId");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Imagenes_PublicacionId",
@@ -104,26 +103,21 @@ namespace Data.Migrations
                 column: "PublicacionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Publicaciones_IdCasa",
+                name: "IX_Publicaciones_UsuarioId",
                 table: "Publicaciones",
-                column: "IdCasa");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Publicaciones_IdUsuario",
-                table: "Publicaciones",
-                column: "IdUsuario");
+                column: "UsuarioId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Casas");
+
+            migrationBuilder.DropTable(
                 name: "Imagenes");
 
             migrationBuilder.DropTable(
                 name: "Publicaciones");
-
-            migrationBuilder.DropTable(
-                name: "Casas");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");

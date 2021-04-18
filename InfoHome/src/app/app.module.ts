@@ -9,11 +9,12 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { File } from '@ionic-native/file/ngx'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ComponentesModule, PublicacionCasaPageModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ComponentesModule, PublicacionCasaPageModule, HttpClientModule, IonicStorageModule.forRoot()],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ImagePicker, File, Storage],
   bootstrap: [AppComponent],
 })

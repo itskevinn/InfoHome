@@ -1,8 +1,11 @@
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Casa } from 'src/app/interfaces/casa';
 import { Usuario } from 'src/app/interfaces/usuario';
+import { CasaService } from 'src/app/service/casa.service';
+import { Storage } from '@ionic/storage';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-registro-casa',
@@ -10,29 +13,59 @@ import { Usuario } from 'src/app/interfaces/usuario';
   styleUrls: ['./registro-casa.page.scss'],
 })
 export class RegistroCasaPage implements OnInit {
-  tipos: string[] = ["Arriendo", "Venta"]
   ciudades: string[]
   departamentos: string[] = ["Cesar", "Guajira"]
-  tipo: string
+  usuario: Usuario
   departamento: string
   casa: Casa
   ciudad: string
   formGroup: FormGroup
+  currentUserSubject: any
 
-  constructor(private formBuilder: FormBuilder, private toastController: ToastController) { }
+  constructor(private casaService: CasaService, private storage: Storage, private formBuilder: FormBuilder, private toastController: ToastController, private modalController: ModalController) { }
 
   ngOnInit() {
     this.buildForm();
+    this.getUser().then((u) => {
+      u.subscribe((r) => {
+        this.usuario = r;
+      });
+    });
+  }
+  buildForm() {
+    this.casa = new Casa();
+    this.casa.propietario = new Usuario();
+    this.casa.barrio = '';
+    this.casa.ciudad = '';
+    this.casa.departamento = '';
+    this.casa.direccion = '';
+    this.casa.numeroDeBanos = '';
+    this.casa.numeroDeCuartos = '';
+
+    this.formGroup = this.formBuilder.group({
+      barrio: [this.casa.barrio, [Validators.required]],
+      direccion: [this.casa.direccion, [Validators.required]],
+      numeroDeBanos: [this.casa.numeroDeBanos, [Validators.required]],
+      numeroDeCuartos: [this.casa.numeroDeCuartos, [Validators.required]],
+    })
+  }
+  async getUser() {
+    await this.cargarUsuario();
+    return this.currentUserSubject.asObservable();
   }
   consultarUsuario() {
-    let usuario = new Usuario()
-    usuario.id = '123';
-    usuario.apellido = "Pontón";
-    usuario.nombre = "Kevin"
-    usuario.correo = " kvin@gmail.com"
-    usuario.fechaNacimiento = new Date("06/11/2000");
-    usuario.telefono = "3102999911"
-    return usuario;
+    this.storage.get('usuarioLogeado').then((u) => {
+      this.usuario = u;
+    });
+    console.log(this.usuario);
+    return this.usuario;
+  }
+  async cargarUsuario() {
+    const usuario = await this.storage.get('usuarioLogeado');
+    if (usuario) {
+      this.currentUserSubject = new BehaviorSubject<Usuario>(usuario);
+    }
+    return;
   }
   get control() {
     return this.formGroup.controls;
@@ -42,6 +75,19 @@ export class RegistroCasaPage implements OnInit {
       this.presentToast("Ingresa todos los datos para publicar tu casa!");
       return;
     }
+    this.casa = this.formGroup.value;
+    this.casa.id = '123'
+    this.casa.ciudad = this.ciudad;
+    this.casa.departamento = this.departamento;
+    this.casa.propietario = this.usuario;
+    this.casa.idUsuario = this.usuario.id;
+    console.log(this.casa);
+    this.casaService.save(this.casa).subscribe((c) => {
+      this.casa = c
+    });
+  }
+  close() {
+    this.modalController.dismiss();
   }
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
@@ -50,26 +96,7 @@ export class RegistroCasaPage implements OnInit {
     });
     toast.present();
   }
-  buildForm() {
-    this.casa = new Casa();
-    this.casa.barrio = '';
-    this.casa.ciudad = '';
-    this.casa.departamento = '';
-    this.casa.direccion = '';
-    this.casa.numeroDeBanos = '';
-    this.casa.numeroDeCuartos = '';
-    this.casa.tipo = '';
-    this.casa.idPropietario = this.consultarUsuario().id;
-    this.formGroup = this.formBuilder.group({
-      barrio: [this.casa.barrio, [Validators.required]],
-      ciudad: [this.casa.ciudad, [Validators.required]],
-      departamento: [this.casa.departamento, [Validators.required]],
-      direccion: [this.casa.direccion, [Validators.required]],
-      numeroDeBanos: [this.casa.numeroDeBanos, [Validators.required]],
-      numeroDeCuartos: [this.casa.numeroDeCuartos, [Validators.required]],
-      tipo: [this.casa.tipo, [Validators.required]]
-    })
-  }
+
   cambiarDepartamento(value) {
     this.departamento = value
     this.validarCiudades(this.departamento);
@@ -85,8 +112,6 @@ export class RegistroCasaPage implements OnInit {
     }
     this.ciudades = ["Rioacha", "Maicao"]
   }
-  cambiarTipo(value) {
-    this.tipo = value;
-  }
+
 
 }

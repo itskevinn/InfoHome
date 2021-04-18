@@ -1,3 +1,4 @@
+import { CasaService } from 'src/app/service/casa.service';
 import { Publicacion } from './../../interfaces/publicacion';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -8,8 +9,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardsCasaComponent implements OnInit {
   @Input() publicacion: Publicacion
-  constructor() { }
+  constructor(private casaService: CasaService) { }
 
   ngOnInit() { }
-
+  
 }

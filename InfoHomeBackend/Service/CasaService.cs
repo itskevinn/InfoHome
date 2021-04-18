@@ -9,14 +9,23 @@ namespace Service
   public class CasaService
   {
     private InfoHomeContext _infoHomeContext;
+    private static Random random = new Random();
+    public static string RandomString(int length)
+    {
+      const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      return new string(Enumerable.Repeat(chars, length)
+        .Select(s => s[random.Next(s.Length)]).ToArray());
+    }
     public CasaService(InfoHomeContext infoHomeContext)
     {
       _infoHomeContext = infoHomeContext;
     }
-    public GuardarCasaResponse GuardarCasa(Casa casa)
+    public GuardarCasaResponse Guardar(Casa casa)
     {
       try
       {
+        string id = RandomString(15);
+        casa.Id = id;
         var casaBuscada = _infoHomeContext.Casas.Find(casa.Id);
         if (casaBuscada != null)
         {
@@ -31,12 +40,18 @@ namespace Service
         return new GuardarCasaResponse($"Ocurrió un error {e.Message}");
       }
     }
-
+    public List<Casa> ConsultarCasasUsuario(string idUsuario)
+    {
+      List<Casa> casas = new List<Casa>();
+      casas = _infoHomeContext.Casas.Where(c => c.IdUsuario == idUsuario).ToList();
+      return casas;
+    }
     public List<Casa> ConsultarCasas()
     {
       return _infoHomeContext.Casas.ToList();
     }
-    public Casa ConsultarCasa(string id)
+
+    public Casa Consultar(string id)
     {
       return _infoHomeContext.Casas.Find(id);
     }

@@ -12,11 +12,13 @@ namespace InfoHomeBackend.InfoHomeApi.Models
         Id = publicacion.Id;
         Titulo = publicacion.Titulo;
         Detalle = publicacion.Detalle;
-        Casa = publicacion.Casa;
+        IdCasa = publicacion.IdCasa;
         Fecha = publicacion.Fecha;
-        Usuario = publicacion.Usuario;
+        IdUsuario = publicacion.IdUsuario;
         Imagenes = publicacion.Imagenes;
+        Tipo = publicacion.Tipo;
       }
+      public Casa Casa { get; set; }
     }
     public class PublicacionInputModel : Publicacion
     {

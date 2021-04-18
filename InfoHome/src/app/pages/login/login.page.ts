@@ -4,6 +4,7 @@ import { RegistroUsuarioPage } from './../registro-usuario/registro-usuario.page
 import { Component, OnInit } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -12,26 +13,28 @@ import { ModalController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   usuario: Usuario
-  USUARIOID: string = '3ZE4D6FI0R9S8M'
-  constructor(private modalController: ModalController, private usuarioService: UsuarioService) { }
+  USUARIOID: string = 'S5ZDT0Y7665S3R'
+  constructor(private modalController: ModalController, private usuarioService: UsuarioService, private storage: Storage) { }
 
   ngOnInit() {
+
   }
 
   async onLogin() {
-
-    this.usuarioService.saveStorage('usuarioLogeado', this.usuario);
+    this.consultarUsuario()
   }
 
+
   async onRegistrar() {
-    const modal = await this.modalController.create({ 
+    const modal = await this.modalController.create({
       component: RegistroUsuarioPage,
       componentProps: {}
     });
     modal.present();
   }
   consultarUsuario() {
-    this.usuarioService.get(this.USUARIOID).subscribe((u) =>
-      this.usuario = u)
+    this.usuarioService.get(this.USUARIOID).subscribe((u) => {
+      this.usuario = u;
+    });
   }
 }

@@ -45,15 +45,16 @@ namespace InfoHomeBackend.InfoHomeApi.Controllers
         Id = publicacionInputModel.Id,
         Titulo = publicacionInputModel.Titulo,
         Detalle = publicacionInputModel.Detalle,
-        Casa = publicacionInputModel.Casa,
+        IdCasa = publicacionInputModel.IdCasa,
         Fecha = publicacionInputModel.Fecha,
-        Usuario = publicacionInputModel.Usuario,
-        Imagenes = publicacionInputModel.Imagenes
+        IdUsuario = publicacionInputModel.IdUsuario,
+        Imagenes = publicacionInputModel.Imagenes,
+        Tipo = publicacionInputModel.Tipo
       };
       return publicacion;
     }
 
-    // GET: api/AjusteInventario
+    // GET: api/Publicacion
     [HttpGet]
     public IEnumerable<PublicacionViewModel> Gets()
     {

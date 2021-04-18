@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity
@@ -8,32 +8,21 @@ namespace Entity
     [Key]
     [Required(ErrorMessage = "Esta casa ya se encuentra registrada")]
     public string Id { get; set; }
-    [Required(ErrorMessage = "Ingrese la dirección de la casa")]
-    public string Dirección { get; set; }
     [Required(ErrorMessage = "Ingrese el número de cuartos")]
-    public string NúmeroDeCuartos { get; set; }
+    public string NumeroDeCuartos { get; set; }
     [Required(ErrorMessage = "Ingrese el número de baños")]
-    public string NúmeroDeBaños { get; set; }
-    [Required(ErrorMessage = "Se necesita registrar al propietario de la casa")]
-    [NotMapped]
-    public Usuario Propietario { get; set; }
-    public string IdPropietario { get; set; }
-    [Required(ErrorMessage = "Seleccione un tipo: Arriendo, Venta")]
-    [TipoValidacion(ErrorMessage = "Seleccione un tipo válido")]
-    public string Tipo { get; set; }
-    public class TipoValidacion : ValidationAttribute
-    {
-      protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-      {
-        if ((value.ToString().ToLower() == "arriendo") || (value.ToString().ToLower() == "venta"))
-        {
-          return ValidationResult.Success;
-        }
-        else
-        {
-          return new ValidationResult(ErrorMessage);
-        }
-      }
-    }
+    public string NumeroDeBanos { get; set; }
+    [Required(ErrorMessage = "Se requiere al propietario de la casa")]
+    public string IdUsuario { get; set; }
+
+    [Required(ErrorMessage = "Se requiere una dirección")]
+    public string Direccion { get; set; }
+    [Required(ErrorMessage = "Se requiere un departamento")]
+    public string Departamento { get; set; }
+    [Required(ErrorMessage = "Se requiere una ciudad")]
+    public string Ciudad { get; set; }
+    [Required(ErrorMessage = "Se requiere un barrio")]
+    public string Barrio { get; set; }
+
   }
 }

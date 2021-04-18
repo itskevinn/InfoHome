@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Usuario } from './../../interfaces/usuario';
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class RegistroUsuarioPage implements OnInit {
   usuario: Usuario
   fechaNacimiento = new Date()
   formGroup: FormGroup;
-  constructor(private formBuilder: FormBuilder, private toastController: ToastController, private usuarioService: UsuarioService) { }
+  constructor(private formBuilder: FormBuilder, public modalController: ModalController, private toastController: ToastController, private usuarioService: UsuarioService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -36,7 +36,7 @@ export class RegistroUsuarioPage implements OnInit {
   }
   onSubmit() {
     if (this.formGroup.invalid) {
-      this.presentToast("Ingresa todos los datos para publicar tu casa!");
+      this.presentToast("Ingresa todos los datos para registrarte");
       return;
     }
     this.registrarUsuario();
@@ -58,6 +58,9 @@ export class RegistroUsuarioPage implements OnInit {
       this.usuario = r
     )
     this.formGroup.reset();
+  }
+  close() {
+    this.modalController.dismiss();
   }
   get control() {
     return this.formGroup.controls;

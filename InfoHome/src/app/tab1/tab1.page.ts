@@ -2,44 +2,28 @@ import { PublicacionCasaPage } from './../pages/publicacion-casa/publicacion-cas
 import { ModalController } from '@ionic/angular';
 import { Imagen } from './../interfaces/imagen';
 import { Usuario } from './../interfaces/usuario';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Publicacion } from '../interfaces/publicacion';
+import { PublicacionService } from '../service/publicacion.service';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
-  constructor(private modalController: ModalController) { }
+export class Tab1Page implements OnInit {
+  constructor(private modalController: ModalController, private publicacionService: PublicacionService) { }
   fecha = new Date("06/11/2000")
-  usuario: Usuario = {
-    apellido: "Pontón",
-    nombre: "Kevin",
-    correo: "Kevin@gmail.com",
-    fechaNacimiento: this.fecha,
-    id: "123",
-    telefono: "3121111133",
-    casas: [{
-      barrio: "Mareiga",
-      ciudad: "Valledupar",
-      departamento: "Cesar",
-      direccion: "Calle 64 # 02 - 1",
-      numeroDeBanos: "5",
-      numeroDeCuartos: "6",
-      idPropietario: "123",
-      tipo: "Venta",
-      propietario: {
-        apellido: "Pontón",
-        nombre: "Kevin",
-        correo: "Kevin@gmail.com",
-        fechaNacimiento: this.fecha,
-        id: "123",
-        telefono: "3121111133",
-        casas: []
-      },
-    }]
+  publicacionesEnVenta: Publicacion[] = []
+  publicacionesEnArriendo: Publicacion[] = []
+  ngOnInit() {
+    this.publicacionService.getByType("Arriendo")
+      .subscribe((p) => {
+        this.publicacionesEnArriendo = p
+      });
+    this.publicacionService.getByType("Venta")
+      .subscribe((p) => {
+        this.publicacionesEnVenta = p
+      })
   }
-
-
 }

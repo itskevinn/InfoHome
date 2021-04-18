@@ -10,5 +10,6 @@ export class Publicacion {
   imagenes: Imagen[]
   idUsuario: string
   idCasa: string
+  tipo: string
   casa: Casa
 }
