@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(InfoHomeContext))]
-    [Migration("20210415034444_InitialCreate")]
+    [Migration("20210418192006_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,28 +26,40 @@ namespace Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Dirección")
+                    b.Property<string>("Barrio")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NúmeroDeBaños")
+                    b.Property<string>("Ciudad")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NúmeroDeCuartos")
+                    b.Property<string>("Departamento")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PropietarioId")
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdUsuario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumeroDeBanos")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumeroDeCuartos")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UsuarioId")
                         .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PropietarioId");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Casas");
                 });
@@ -78,14 +90,23 @@ namespace Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CasaId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Detalle")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("IdCasa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdUsuario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
@@ -95,8 +116,6 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CasaId");
 
                     b.HasIndex("UsuarioId");
 
@@ -137,11 +156,9 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Entity.Casa", b =>
                 {
-                    b.HasOne("Entity.Usuario", "Propietario")
-                        .WithMany()
-                        .HasForeignKey("PropietarioId");
-
-                    b.Navigation("Propietario");
+                    b.HasOne("Entity.Usuario", null)
+                        .WithMany("Casas")
+                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("Entity.Imagen", b =>
@@ -153,22 +170,21 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Entity.Publicacion", b =>
                 {
-                    b.HasOne("Entity.Casa", "Casa")
-                        .WithMany()
-                        .HasForeignKey("CasaId");
-
-                    b.HasOne("Entity.Usuario", "Usuario")
-                        .WithMany()
+                    b.HasOne("Entity.Usuario", null)
+                        .WithMany("Publicaciones")
                         .HasForeignKey("UsuarioId");
-
-                    b.Navigation("Casa");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Entity.Publicacion", b =>
                 {
                     b.Navigation("Imagenes");
+                });
+
+            modelBuilder.Entity("Entity.Usuario", b =>
+                {
+                    b.Navigation("Casas");
+
+                    b.Navigation("Publicaciones");
                 });
 #pragma warning restore 612, 618
         }

@@ -16,9 +16,13 @@ namespace InfoHomeApi.Controllers
   public class UsuarioController : Controller
   {
     private readonly UsuariosService _usuarioService;
+    private readonly CasaService _casaService;
+    private readonly PublicacionService _publicacionService;
     public UsuarioController(InfoHomeContext context)
     {
       _usuarioService = new UsuariosService(context);
+      _casaService = new CasaService(context);
+      _publicacionService = new PublicacionService(context);
     }
     // POST: api/Usuario
     [HttpPost]
@@ -66,6 +70,8 @@ namespace InfoHomeApi.Controllers
       var usuario = _usuarioService.Consultar(id).Usuario;
       if (usuario == null) return NotFound();
       var usuarioViewModel = new UsuarioViewModel(usuario);
+      usuarioViewModel.Casas = _casaService.ConsultarCasasUsuario(usuario.Id);
+      usuarioViewModel.Publicaciones = _publicacionService.ConsultarPublicacionUsuario(usuario.Id);
       return usuarioViewModel;
     }
     [HttpPut("{id}")]

@@ -1,3 +1,5 @@
+import { Casa } from "./casa"
+
 export class Usuario{
   id: string
   nombre: string
@@ -5,4 +7,5 @@ export class Usuario{
   fechaNacimiento: Date
   correo: string
   telefono: string
+  casas: Casa[]
 }

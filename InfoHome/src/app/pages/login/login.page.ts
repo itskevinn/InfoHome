@@ -1,8 +1,10 @@
+import { UsuarioService } from 'src/app/service/usuario.service';
+import { Usuario } from './../../interfaces/usuario';
+import { RegistroUsuarioPage } from './../registro-usuario/registro-usuario.page';
 import { Component, OnInit } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
-
-import { RegistrarUsuarioComponent } from 'src/app/componentes/registrar-usuario/registrar-usuario.component';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -10,19 +12,29 @@ import { RegistrarUsuarioComponent } from 'src/app/componentes/registrar-usuario
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-  constructor( private modalController: ModalController ) { }
+  usuario: Usuario
+  USUARIOID: string = 'S5ZDT0Y7665S3R'
+  constructor(private modalController: ModalController, private usuarioService: UsuarioService, private storage: Storage) { }
 
   ngOnInit() {
+
   }
 
-  onClick(){}
+  async onLogin() {
+    this.consultarUsuario()
+  }
+
 
   async onRegistrar() {
     const modal = await this.modalController.create({
-      component: RegistrarUsuarioComponent,
-      componentProps: { }
+      component: RegistroUsuarioPage,
+      componentProps: {}
     });
     modal.present();
+  }
+  consultarUsuario() {
+    this.usuarioService.get(this.USUARIOID).subscribe((u) => {
+      this.usuario = u;
+    });
   }
 }

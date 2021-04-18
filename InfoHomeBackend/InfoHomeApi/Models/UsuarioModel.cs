@@ -22,9 +22,9 @@ namespace InfoHomeApi.Models
         Telefono = usuario.Telefono;
         Correo = usuario.Correo;
         FechaNacimiento = usuario.FechaNacimiento;
+        Casas = usuario.Casas;
+        Publicaciones = usuario.Publicaciones;
       }
-      public List<Casa> Casas { get; set; }
-      public List<Publicacion> Publicaciones { get; set; }
     }
   }
 }

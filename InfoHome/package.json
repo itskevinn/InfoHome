@@ -24,6 +24,8 @@
     "@ionic-native/file": "^5.32.0",
     "@ionic-native/image-picker": "^5.32.0",
     "@ionic/angular": "^5.5.2",
+    "@ionic/storage": "^3.0.4",
+    "@ionic/storage-angular": "^3.0.6",
     "cordova-browser": "6.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

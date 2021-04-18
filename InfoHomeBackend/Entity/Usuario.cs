@@ -22,6 +22,7 @@ namespace Entity
     [DataType(DataType.PhoneNumber, ErrorMessage = "Ingrese un número de teléfono válido.")]
     [StringLength(13, ErrorMessage = "Proporcione un número de teléfono válido")]
     public string Telefono { get; set; }
-
+    public List<Casa> Casas { get; set; }
+    public List<Publicacion> Publicaciones { get; set; }
   }
 }

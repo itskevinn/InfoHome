@@ -15,7 +15,7 @@ export class PublicacionService {
   public publicaciones: Publicacion[] = [];
   constructor(
     private http: HttpClient
-  ) { this.baseUrl = "https://localhost:5001/" }
+  ) { this.baseUrl = "https://localhost:5001" }
 
   save(publicacion: Publicacion) {
     publicacion.imagenes = this.darIdAImagenes(publicacion.imagenes, publicacion.id);
@@ -23,6 +23,15 @@ export class PublicacionService {
     return this.http.post<Publicacion>(this.baseUrl + "api/Publicacion", publicacion).pipe(
       tap((_) => this.updateWhenSaved(),
       ),
+    );
+  }
+  
+  getByType(tipo: string) {
+    const url = `${this.baseUrl}/api/PublicacionTipo/${tipo}`
+    return this.http.get<Publicacion[]>(url).pipe(
+      tap((p) => {
+        this.publicaciones = p
+      }),
     );
   }
   darIdAImagenes(imagenes: Imagen[], id: string) {

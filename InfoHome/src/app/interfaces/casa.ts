@@ -1,11 +1,12 @@
 import { Usuario } from './usuario';
 export class Casa {
-  direccion: string
+  id: string
+  numeroDeBanos: string
   numeroDeCuartos: string
+  barrio: string
+  direccion: string
   departamento: string
   ciudad: string
-  barrio: string
-  numeroDeBanos: string
   propietario: Usuario
-  tipo: string
+  idUsuario: string
 }
