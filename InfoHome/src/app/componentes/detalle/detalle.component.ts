@@ -8,9 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DetalleComponent implements OnInit {
   @Input() publicacion: Publicacion
-  
+
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.publicacion)
+  }
 
 }

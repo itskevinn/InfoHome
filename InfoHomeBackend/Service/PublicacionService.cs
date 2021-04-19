@@ -41,7 +41,6 @@ namespace Service
           return new GuardarPublicacionResponse("Publicacion ya registrada");
         }
         GenerarCodigoImagen(publicacion);
-        publicacion.IdCasa = GenerarCodigoCasa();
         _infoHomeContext.Publicaciones.Add(publicacion);
         _infoHomeContext.SaveChanges();
         return new GuardarPublicacionResponse(publicacion, "Publicacion guardada exitosamente");
@@ -114,7 +113,7 @@ namespace Service
     {
       try
       {
-        return _infoHomeContext.Publicaciones.Where((p) => p.Tipo == tipo).ToList();
+        return _infoHomeContext.Publicaciones.Include((p) => p.Imagenes).Where((p) => p.Tipo == tipo).ToList();
 
       }
       catch (Exception)

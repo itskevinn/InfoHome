@@ -8,6 +8,7 @@ import { Casa } from '../interfaces/casa';
 })
 export class CasaService {
   baseUrl: string
+  casa: Casa
   public casas: Casa[] = [];
   constructor(
     private http: HttpClient
@@ -29,6 +30,16 @@ export class CasaService {
       tap((p) => this.casas = p)
     )
   }
+  get(id: string) {
+    const url = `${this.baseUrl}api/Casa/${id}`
+    return this.http.get<Casa>(url).pipe(
+      tap((r) => {
+        this.casa = r;
+        console.log(this.casa);
+      })
+    )
+  }
+
   getsByUser(id: string) {
     console.log(id);
     const url = `${this.baseUrl}api/CasaUsuario/${id}`

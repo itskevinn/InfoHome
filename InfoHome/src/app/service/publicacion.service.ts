@@ -20,17 +20,19 @@ export class PublicacionService {
   save(publicacion: Publicacion) {
     publicacion.imagenes = this.darIdAImagenes(publicacion.imagenes, publicacion.id);
     console.log(publicacion.imagenes);
-    return this.http.post<Publicacion>(this.baseUrl + "api/Publicacion", publicacion).pipe(
+    console.log(publicacion)
+    return this.http.post<Publicacion>(this.baseUrl + "/api/Publicacion", publicacion).pipe(
       tap((_) => this.updateWhenSaved(),
       ),
     );
   }
-  
+
   getByType(tipo: string) {
     const url = `${this.baseUrl}/api/PublicacionTipo/${tipo}`
     return this.http.get<Publicacion[]>(url).pipe(
       tap((p) => {
-        this.publicaciones = p
+        this.publicaciones = p;
+        console.log(this.publicaciones);
       }),
     );
   }
@@ -46,7 +48,10 @@ export class PublicacionService {
   }
   gets() {
     return this.http.get<Publicacion[]>(this.baseUrl + 'api/Publicacion').pipe(
-      tap((p) => this.publicaciones = p)
+      tap((p) => {
+        this.publicaciones = p
+        console.log(this.publicaciones);
+      })
     )
   }
   edit(id: string, publicacion: Publicacion) {

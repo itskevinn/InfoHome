@@ -41,6 +41,8 @@ export class PublicacionCasaPage implements OnInit {
   }
   cambiarCasa(value) {
     this.casa = value
+    console.log(this.casa);
+
   }
   cambiarTipo(value) {
     this.tipo = value;
@@ -254,7 +256,6 @@ export class PublicacionCasaPage implements OnInit {
       }
     })
     console.log(this.imagenes);
-
   }
   onSubmit() {
     if (this.formGroup.invalid) {
@@ -276,10 +277,10 @@ export class PublicacionCasaPage implements OnInit {
     this.publicacion.idCasa = this.casa.id
     this.publicacion.idUsuario = this.usuario.id;
     this.publicacion.tipo = this.tipo;
-    this.publicacionService.save(this.publicacion).subscribe((p) =>
-      this.publicacion = p
-    );
-    console.log(this.publicacion);
-
+    this.publicacionService.save(this.publicacion)
+      .subscribe((p) => {
+        this.publicacion = p
+        console.log(this.publicacion);        
+      });
   }
 }

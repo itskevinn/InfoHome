@@ -92,7 +92,7 @@
             <ion-col size="12">
               <ion-label style="size: 22px !important;">¿Cuál casa deseas publicar?</ion-label>
             </ion-col>
-            <ion-select #v (ionChange)="cambiarCasa(v.value)" (click)="cargarCasas()" placeholder="Selecciona una">
+            <ion-select #vC (ionChange)="cambiarCasa(vC.value)" (click)="cargarCasas()" placeholder="Selecciona una">
               <ion-select-option *ngFor="let casa of casas" [value]="casa">
                 {{casa.direccion}}
               </ion-select-option>
