@@ -1,17 +1,40 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Buscar
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-toolbar>
+  <ion-searchbar placeholder="Cesar"
+                inputmode="decimal"
+                animated
+                debounce="750"
+                [value]="textoBuscar"
+                (ionChange)="onSearchChange($event)">
+  </ion-searchbar>
+</ion-toolbar>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <ion-list *ngIf="publicaciones.length === 0">
+    <ion-list-header>
+      <ion-label>Sugerencias</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let sugerencia of sugerencias" (click)="textoBuscar = sugerencia">
+      <ion-label color="primary">{{sugerencia}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="publicaciones.length !== 0">
+    <br>
+    <ion-label class="titulo-inicio">Arriendos</ion-label>
+    <app-slideshow-backdrop [publicaciones]="this.publicacionesEnArriendo"></app-slideshow-backdrop>
+    <ion-label class="titulo-inicio">Casas en venta</ion-label>
+    <app-slideshow-backdrop [publicaciones]="this.publicacionesEnVenta"></app-slideshow-backdrop>
+  </div>
+
+  <br>
+  <ion-label *ngIf="resultado"> No se encontraron resultados </ion-label>
 </ion-content>

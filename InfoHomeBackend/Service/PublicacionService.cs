@@ -56,6 +56,21 @@ namespace Service
       publicaciones = _infoHomeContext.Publicaciones.Where(p => p.IdUsuario == idUsuario).ToList();
       return publicaciones;
     }
+
+    public List<Publicacion> ConsultarPublicacionSearch(string search)
+    {
+      List<Publicacion> publicaciones = new List<Publicacion>();
+      List<Publicacion> publicacionesSearch = new List<Publicacion>();
+
+      foreach (var item in _infoHomeContext.Publicaciones.ToList())
+      {
+        if(_casaService.ConsultarCasasSearch(search, item.IdCasa)){
+          publicacionesSearch.Add(item);
+        }
+      }
+      return publicacionesSearch;
+    }
+
     private static string GenerarCodigoCasa()
     {
       return RandomString(14);
