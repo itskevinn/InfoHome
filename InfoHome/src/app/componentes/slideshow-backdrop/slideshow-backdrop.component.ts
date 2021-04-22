@@ -1,4 +1,5 @@
-import { DetalleComponent } from './../detalle/detalle.component';
+import { DetallePage } from './../../pages/detalle/detalle.page';
+
 import { Publicacion } from './../../interfaces/publicacion';
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
@@ -105,7 +106,7 @@ export class SlideshowBackdropComponent implements OnInit {
   }
   async verDetalle(publicacion: Publicacion) {
     const modal = await this.modalController.create({
-      component: DetalleComponent,
+      component: DetallePage,
       componentProps: {
         publicacion
       }

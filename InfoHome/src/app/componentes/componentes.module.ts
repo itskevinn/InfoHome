@@ -4,7 +4,6 @@ import { SlideshowImagesComponent } from './slideshow-images/slideshow-images.co
 import { InsertarImagenCardComponent } from './insertar-imagen-card/insertar-imagen-card.component';
 import { HeaderBackButtonComponent } from './header-back-button/header-back-button.component';
 import { HeaderComponent } from './header/header.component';
-import { DetalleComponent } from './detalle/detalle.component';
 import { SlideshowDetailsImagesComponent } from './slideshow-details-images/slideshow-details-images.component';
 import { CardsCasaComponent } from './cards-casa/cards-casa.component';
 import { IonicModule } from '@ionic/angular';
@@ -15,10 +14,10 @@ import { SlideshowBackdropComponent } from './slideshow-backdrop/slideshow-backd
 
 
 @NgModule({
-  declarations: [SlideshowBackdropComponent, CardsCasaComponent, SlideshowDetailsImagesComponent, DetalleComponent, HeaderBackButtonComponent, HeaderComponent, InsertarImagenCardComponent, SlideshowImagesComponent, HeaderPublicacionComponent, RegistrarUsuarioComponent],
+  declarations: [SlideshowBackdropComponent, CardsCasaComponent, SlideshowDetailsImagesComponent, HeaderBackButtonComponent, HeaderComponent, InsertarImagenCardComponent, SlideshowImagesComponent, HeaderPublicacionComponent, RegistrarUsuarioComponent],
   imports: [
     CommonModule, IonicModule
   ],
-  exports: [SlideshowBackdropComponent, DetalleComponent, HeaderComponent, HeaderBackButtonComponent, InsertarImagenCardComponent, SlideshowImagesComponent, HeaderPublicacionComponent]
+  exports: [SlideshowBackdropComponent, HeaderComponent, SlideshowDetailsImagesComponent,HeaderBackButtonComponent, InsertarImagenCardComponent, SlideshowImagesComponent, HeaderPublicacionComponent]
 })
 export class ComponentesModule { }

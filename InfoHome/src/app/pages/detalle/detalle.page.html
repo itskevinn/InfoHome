@@ -1,9 +1,9 @@
-<ion-content>
+<ion-content class="ion-margin">
   <app-slideshow-details-images [imagenes]=publicacion.imagenes></app-slideshow-details-images>
-  <ion-label>{{publicacion.titulo}}</ion-label>
-  <br>
-  <h3>{{publicacion.detalle}}</h3>
-  <br>
+  <ion-label class="titulo-inicio">{{publicacion.titulo}}</ion-label>
+  <ion-text style="padding-top: 15px;">
+    <h1>{{publicacion.detalle}}</h1>
+  </ion-text>
   <ion-grid fixed>
     <ion-row>
       <ion-col size="6">a</ion-col>

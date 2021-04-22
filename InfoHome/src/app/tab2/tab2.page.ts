@@ -9,7 +9,7 @@ import { PublicacionService } from '../service/publicacion.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-
+  toggledSearchBar = true;
   sugerencias = ['Cesar', 'La Guajira', 'Valledupar', 'Albania'];
   textoBuscar: string;
   publicaciones: Publicacion[] = [];
@@ -17,18 +17,22 @@ export class Tab2Page {
   publicacionesEnArriendo: Publicacion[] = [];
   resultado = false;
 
-  constructor(private publicacionService: PublicacionService) {}
+  constructor(private publicacionService: PublicacionService) { }
 
-  onSearchChange( event ){
+  toggleSearchBar() {
+
+  }
+
+  onSearchChange(event) {
     const buscar = event.detail.value;
     if (buscar.length === 0) {
       this.publicaciones = [];
       return;
     }
 
-    this.publicacionService.getsBySearch(buscar).subscribe( respuesta => {
+    this.publicacionService.getsBySearch(buscar).subscribe(respuesta => {
       this.publicaciones = respuesta;
-      if (this.publicaciones.length === 0){
+      if (this.publicaciones.length === 0) {
         this.resultado = true;
         return;
       }
@@ -37,11 +41,11 @@ export class Tab2Page {
     });
   }
 
-  porTipo(p){
-    p.forEach( element => {
-      if (element.tipo === 'Arriendo'){
+  porTipo(p) {
+    p.forEach(element => {
+      if (element.tipo === 'Arriendo') {
         this.publicacionesEnArriendo.push(element);
-      }else{
+      } else {
         this.publicacionesEnVenta.push(element);
       }
     });

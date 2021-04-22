@@ -62,15 +62,15 @@ namespace Service
       List<Publicacion> publicaciones = new List<Publicacion>();
       List<Publicacion> publicacionesSearch = new List<Publicacion>();
 
-      foreach (var item in _infoHomeContext.Publicaciones.ToList())
+      foreach (var item in _infoHomeContext.Publicaciones.Include((p) => p.Imagenes).ToList())
       {
-        if(_casaService.ConsultarCasasSearch(search, item.IdCasa)){
+        if (_casaService.ConsultarCasasSearch(search, item.IdCasa))
+        {
           publicacionesSearch.Add(item);
         }
       }
       return publicacionesSearch;
     }
-
     private static string GenerarCodigoCasa()
     {
       return RandomString(14);

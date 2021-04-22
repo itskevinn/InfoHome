@@ -10,11 +10,12 @@ export class SlideshowDetailsImagesComponent implements OnInit {
   @Input() imagenes: Imagen[]
   constructor() { }
   slideOpts = {
-    initialSlide: 0,
-    speed: 400,
     slidesPerView: 1,
-    freeMode: false,
+    slidesPerColumn: 1,
+    slidesPerGroup: 1,
+    watchSlidesProgress: true,
   };
+
   ngOnInit() { }
 
 }

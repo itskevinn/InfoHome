@@ -1,32 +1,34 @@
 <ion-content [fullscreen]="true">
-  <ion-item lines="none">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/tab1" mode="md"></ion-back-button>
-    </ion-buttons>
-    <ion-buttons slot="end" *ngIf="this.activeIndex===0; else volverButton">
-      <ion-chip (click)="cambiarIndex(1)" color="warning" shape="round" size="small">
-        <ion-label>Siguiente</ion-label>
-        <ion-icon name="arrow-forward-outline"></ion-icon>
-      </ion-chip>
-    </ion-buttons>
-    <ng-template #volverButton>
-      <ion-buttons slot="end">
-        <ion-chip (click)="cambiarIndex(0)" color="warning" shape="round" size="small">
-          <ion-icon name="arrow-back-outline"></ion-icon>
-          <ion-label>Volver</ion-label>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/tab1" mode="md"></ion-back-button>
+      </ion-buttons>
+      <ion-buttons slot="end" *ngIf="this.activeIndex===0; else volverButton">
+        <ion-chip (click)="cambiarIndex(1)" color="warning" shape="round" size="small">
+          <ion-label>Siguiente</ion-label>
+          <ion-icon name="arrow-forward-outline"></ion-icon>
         </ion-chip>
       </ion-buttons>
-    </ng-template>
-  </ion-item>
+      <ng-template #volverButton>
+        <ion-buttons slot="end">
+          <ion-chip (click)="cambiarIndex(0)" color="warning" shape="round" size="small">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+            <ion-label>Volver</ion-label>
+          </ion-chip>
+        </ion-buttons>
+      </ng-template>
+    </ion-item>
+  </ion-toolbar>
+
   <form [formGroup]="formGroup">
     <ion-slides #slides (ionSlideDidChange)="slideChanged()" options="slideOpts" mode="ios">
       <ion-slide>
-        <br>
         <ion-list>
           <ion-row>
             <ion-col size="12">
               <ion-item class="ion-no-border">
-                <ion-label position="floating">Título</ion-label>
+                <ion-label class="input-label" position="floating">Título</ion-label>
                 <ion-input formControlName="titulo" placeholder="Título de la publicación"></ion-input>
               </ion-item>
               <ion-label class="ion-text-left" color="danger"
@@ -35,12 +37,11 @@
               </ion-label>
             </ion-col>
           </ion-row>
-          <br>
           <ion-row>
             <ion-col size="12">
               <ion-item>
-                <ion-label position="stacked">Detalles</ion-label>
-                <ion-textarea formControlName="detalle" rows="6" cols="20"
+                <ion-label class="input-label" position="stacked">Detalles</ion-label>
+                <ion-textarea formControlName="detalle" rows="4" cols="20"
                   placeholder=" Información general de la casa"></ion-textarea>
               </ion-item>
             </ion-col>
@@ -48,7 +49,7 @@
           <ion-row>
             <ion-col size="12">
               <ion-item>
-                <ion-label>Tipo</ion-label>
+                <ion-label class="input-label">Tipo</ion-label>
                 <ion-select #vTip (ionChange)="cambiarTipo(vTip.value)" placeholder="Selecciona uno"
                   interface="popover">
                   <ion-select-option *ngFor="let tipo of tipos" [value]="tipo">
@@ -58,7 +59,6 @@
               </ion-item>
             </ion-col>
           </ion-row>
-          <br>
           <ion-row>
             <ion-col size="12">
               <section *ngIf="this.imagenes.length===0; else imagenesView">
@@ -72,8 +72,8 @@
                         </ion-button>
                       </ion-buttons>
                     </ion-row>
-                    <ion-row style="margin-left: 18px; margin-bottom: 15px;">
-                      <ion-label>Insertar imágenes</ion-label>
+                    <ion-row style="margin-left: 18px;">
+                      <ion-label class="input-label">Insertar imágenes</ion-label>
                     </ion-row>
                   </ion-card-content>
                 </ion-card>
@@ -85,14 +85,15 @@
           </ion-row>
         </ion-list>
       </ion-slide>
-      <ion-slide>
+      <ion-slide style="margin-top: 40px !important;">
         <br>
         <ion-list>
           <ion-row>
             <ion-col size="12">
-              <ion-label style="size: 22px !important;">¿Cuál casa deseas publicar?</ion-label>
+              <ion-label style="size: 22px !important; font-weight: 600;">¿Cuál casa deseas publicar?</ion-label>
             </ion-col>
-            <ion-select #vC (ionChange)="cambiarCasa(vC.value)" (click)="cargarCasas()" placeholder="Selecciona una">
+            <ion-select #vC (ionChange)="cambiarCasa(vC.value)" (click)="cargarCasas()" 
+            placeholder="Selecciona una">
               <ion-select-option *ngFor="let casa of casas" [value]="casa">
                 {{casa.direccion}}
               </ion-select-option>
@@ -100,8 +101,8 @@
           </ion-row>
           <ion-row>
             <ion-col size="12">
-              <ion-label>¿No la encuentras?</ion-label>
-              <ion-button color="light" class="bottom-btn" style="margin: 15px;" expand="block"
+              <ion-label style="size: 22px !important; font-weight: 600;">¿No la encuentras?</ion-label>
+              <ion-button color="light" style="margin: 15px;" expand="block"
                 (click)="abrirRegistro()" fill="solid" shape="round">
                 Registrar una casa nueva
               </ion-button>

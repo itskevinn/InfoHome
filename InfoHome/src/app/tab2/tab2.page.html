@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
     <ion-title>
       Buscar
@@ -6,15 +6,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-toolbar>
-  <ion-searchbar placeholder="Cesar"
-                inputmode="decimal"
-                animated
-                debounce="750"
-                [value]="textoBuscar"
-                (ionChange)="onSearchChange($event)">
-  </ion-searchbar>
-</ion-toolbar>
+  <ion-toolbar mode="ios" class="ion-no-border">
+    <ion-searchbar mode="ios" placeholder="Buscar" inputmode="decimal" animated debounce="750" [value]="textoBuscar"
+      (ionChange)="onSearchChange($event)">
+    </ion-searchbar>
+  </ion-toolbar>
+
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
