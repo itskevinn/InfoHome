@@ -11,10 +11,8 @@ export class SlideshowDetailsImagesComponent implements OnInit {
   constructor() { }
   slideOpts = {
     slidesPerView: 1,
-    slidesPerColumn: 1,
-    slidesPerGroup: 1,
-    watchSlidesProgress: true,
-  };
+    spaceBetween: 10
+  }
 
   ngOnInit() { }
 

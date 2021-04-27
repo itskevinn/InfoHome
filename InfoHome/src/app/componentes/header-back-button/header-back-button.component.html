@@ -1,10 +1,10 @@
-<ion-header mode="ios" [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button icon="arrow-back-outline" title="Volver"></ion-back-button>
-    </ion-buttons>
-    <ion-title class="titulo-inicio">
+    <ion-title slot="end" style="font-weight: 800;">
       {{titulo}}
     </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="dismiss()" defaultHref="/tabs/tab1" mode="md"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>

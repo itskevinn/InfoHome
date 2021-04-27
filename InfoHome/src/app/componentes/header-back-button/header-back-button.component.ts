@@ -1,3 +1,4 @@
+import { ModalController } from '@ionic/angular';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -7,8 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeaderBackButtonComponent implements OnInit {
   @Input() titulo: string
-  constructor() { }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() { }
+  async dismiss() {
+    await this.modalController.dismiss();
+  }
 
 }

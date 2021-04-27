@@ -1,7 +1,8 @@
 {
   "name": "InfoHome",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }
