@@ -85,7 +85,10 @@ export class RegistroCasaPage implements OnInit {
     this.casaService.save(this.casa).subscribe((c) => {
       this.casa = c
     });
+    this.presentToast('Casa registrada correctamente');
+    this.close();
   }
+
   close() {
     this.modalController.dismiss();
   }
