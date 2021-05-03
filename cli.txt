@@ -1,7 +1,8 @@
 ionic cordova run browser
-
+backend
 Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
 
+comandos migración
 dotnet tool install --global dotnet-ef
 dotnet ef migrations add InitialCreate -s ../InfoHomeApi
 dotnet ef database update -s ../InfoHomeApi
@@ -12,9 +13,12 @@ dotnet add package System.Collections
 
 capa datos:
 nutget EntityFrameworkCore and EntityFramework.SqlServer  version 3.1.9
-EntityFrameworkCore.Tools presentation
+capa api:
+EntityFrameworkCore.Tools 
 System.ComponentModel.Annotations Entity
 
+frontend
+client app
 npm i @ionic/storage 
 npm i @angular/common/http 
 npm i @ionic-native/image-picker
