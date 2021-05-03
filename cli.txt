@@ -6,11 +6,19 @@ dotnet tool install --global dotnet-ef
 dotnet ef migrations add InitialCreate -s ../InfoHomeApi
 dotnet ef database update -s ../InfoHomeApi
 
+capa datos:
 dotnet add package System.Data.SqlClient
 dotnet add package System.Collections
 
-nutged EntityFrameworkCore and EntityFramework.SqlServer datos versio 3.1.9
+capa datos:
+nutget EntityFrameworkCore and EntityFramework.SqlServer  version 3.1.9
 EntityFrameworkCore.Tools presentation
 System.ComponentModel.Annotations Entity
 
-npm i @ionic/storage
+npm i @ionic/storage 
+npm i @angular/common/http 
+npm i @ionic-native/image-picker
+npm i @ionic-native/file
+npm i @ionic/storage-angular
+
+si sale error en los imports, tienes que colocarle /ngx
