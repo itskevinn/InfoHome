@@ -280,7 +280,12 @@ export class PublicacionCasaPage implements OnInit {
     this.publicacionService.save(this.publicacion)
       .subscribe((p) => {
         this.publicacion = p
-        console.log(this.publicacion);        
+        console.log(this.publicacion);
       });
+    this.presentToast("Publicación guardada exitosamente");
+    this.close();
+  }
+  close() {
+    this.router.navigate(['/tabs/tab1'])
   }
 }

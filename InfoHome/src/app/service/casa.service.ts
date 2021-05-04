@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
@@ -12,7 +13,7 @@ export class CasaService {
   public casas: Casa[] = [];
   constructor(
     private http: HttpClient
-  ) { this.baseUrl = "https://localhost:5001/" }
+  ) { this.baseUrl = environment.connectionString }
 
   save(casa: Casa) {
     return this.http.post<Casa>(this.baseUrl + "api/Casa", casa).pipe(

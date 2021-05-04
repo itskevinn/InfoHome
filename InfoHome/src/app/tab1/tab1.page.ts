@@ -17,6 +17,9 @@ export class Tab1Page implements OnInit {
   publicacionesEnVenta: Publicacion[] = []
   publicacionesEnArriendo: Publicacion[] = []
   ngOnInit() {
+    this.recuperarPublicaciones();
+  }
+  recuperarPublicaciones() {
     this.publicacionService.getByType("Arriendo")
       .subscribe((p) => {
         this.publicacionesEnArriendo = p
@@ -25,5 +28,9 @@ export class Tab1Page implements OnInit {
       .subscribe((p) => {
         this.publicacionesEnVenta = p
       })
+  }
+  doRefresh(event) {
+   this.recuperarPublicaciones();
+    event.target.complete();
   }
 }

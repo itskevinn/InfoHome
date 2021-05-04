@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { tap, catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -16,7 +17,7 @@ export class PublicacionService {
   public publicaciones: Publicacion[] = [];
   constructor(
     private http: HttpClient
-  ) { this.baseUrl = "https://localhost:5001" }
+  ) { this.baseUrl = environment.connectionString }
 
   save(publicacion: Publicacion) {
     publicacion.imagenes = this.darIdAImagenes(publicacion.imagenes, publicacion.id);

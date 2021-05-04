@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
@@ -17,7 +18,7 @@ export class UsuarioService {
   authSubject = new BehaviorSubject(false);
   constructor(
     private http: HttpClient, private storage: Storage) {
-    this.baseUrl = "https://localhost:5001/"
+    this.baseUrl = environment.connectionString
     this.storage.create();
     this.storage.get("usuarioLogeado").then(val => {
       if (val != null) {
