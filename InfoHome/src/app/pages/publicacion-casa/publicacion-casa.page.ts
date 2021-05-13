@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { File } from '@ionic-native/file/ngx';
 import { IonSlides, ToastController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Casa } from 'src/app/interfaces/casa'; 3
+import { Casa } from 'src/app/interfaces/casa'; 
 import { Storage } from '@ionic/storage';
 
 @Component({
