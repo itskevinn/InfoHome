@@ -11,15 +11,16 @@ namespace InfoHomeBackend.InfoHomeApi.Controllers
   public class PublicacionTipoController : ControllerBase
   {
     private readonly PublicacionService _publicacionService;
+
     public PublicacionTipoController(InfoHomeContext context)
     {
       _publicacionService = new PublicacionService(context);
     }
+
     [HttpGet("{tipo}")]
     public IEnumerable<PublicacionViewModel> Gets(string tipo)
     {
       var response = _publicacionService.ConsultarPorTipo(tipo).ConvertAll(p => new PublicacionViewModel(p));
-
       return response;
     }
   }

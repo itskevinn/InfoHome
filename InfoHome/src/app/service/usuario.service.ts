@@ -11,27 +11,28 @@ import { Usuario } from '../interfaces/usuario';
 })
 export class UsuarioService {
 
-  baseUrl: string
+  baseUrl: string;
   public usuarios: Usuario[] = [];
-  public usuario: Usuario
+  public usuario: Usuario;
   private currentUserSubject: BehaviorSubject<Usuario>;
   authSubject = new BehaviorSubject(false);
+
   constructor(
     private http: HttpClient, private storage: Storage) {
-    this.baseUrl = environment.connectionString
+    this.baseUrl = environment.connectionString;
     this.storage.create();
-    this.storage.get("usuarioLogeado").then(val => {
+    this.storage.get('usuarioLogeado').then(val => {
       if (val != null) {
         this.authSubject.next(true);
       }
       else {
         this.authSubject.next(false);
       }
-    })
+    });
   }
 
   save(usuario: Usuario) {
-    return this.http.post<Usuario>(this.baseUrl + "api/Usuario", usuario).pipe(
+    return this.http.post<Usuario>(this.baseUrl + '/Usuario', usuario).pipe(
       tap((_) => this.updateWhenSaved(),
       ),
     );
@@ -44,35 +45,35 @@ export class UsuarioService {
     }*/
   updateWhenSaved() {
     this.gets();
-    console.log("Usuario guardado exitosamente")
+    console.log('Usuario guardado exitosamente');
   }
   gets() {
-    return this.http.get<Usuario[]>(this.baseUrl + 'api/Usuario').pipe(
+    return this.http.get<Usuario[]>(this.baseUrl + '/Usuario').pipe(
       tap((p) => this.usuarios = p)
-    )
+    );
   }
   edit(id: string, usuarios: Usuario) {
-    const url = `${this.baseUrl}api/Usuario/${id}`
+    const url = `${this.baseUrl}/Usuario/${id}`;
     return this.http.put<Usuario>(url, usuarios).pipe(
-      tap((_) => console.log("Usuario editado")
+      tap((_) => console.log('Usuario editado')
       ));
   }
+
   get(id: string) {
-    const url = `${this.baseUrl}api/Usuario/${id}`
+    const url = `${this.baseUrl}/Usuario/${id}`;
     return this.http.get<Usuario>(url).pipe(
       tap(async (r) => {
         this.usuario = r;
-        console.log(this.usuario);
-        await this.storage.set('usuarioLogeado', r);
+        await this.storage.set('usuarioLogeado', this.usuario);
       })
-    )
+    );
   }
 
   delete(id: string) {
-    const url = `${this.baseUrl}api/Usuario/${id}`
+    const url = `${this.baseUrl}/Usuario/${id}`;
     return this.http.delete<Usuario>(url).pipe(
-      tap((_) => console.log("Usuario eliminado")
+      tap((_) => console.log('Usuario eliminado')
       )
-    )
+    );
   }
 }

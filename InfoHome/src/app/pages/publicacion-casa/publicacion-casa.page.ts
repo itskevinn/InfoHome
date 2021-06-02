@@ -11,8 +11,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { File } from '@ionic-native/file/ngx';
 import { IonSlides, ToastController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Casa } from 'src/app/interfaces/casa'; 
+import { Casa } from 'src/app/interfaces/casa';
 import { Storage } from '@ionic/storage';
+import { UsuarioService } from 'src/app/service/usuario.service';
 
 @Component({
   selector: 'app-publicacion-casa',
@@ -25,47 +26,57 @@ export class PublicacionCasaPage implements OnInit {
   publicacion: Publicacion
   imagen: Imagen
   imagenes: Imagen[] = []
-  usuario: Usuario
+  usuario: Usuario;
   tipo: string
   tipos: string[] = ["Arriendo", "Venta"]
-  casas: Casa[]
+  casas: Casa[] = [];
   casa: Casa
   currentUserSubject: any
   fecha = new Date()
   formGroup: FormGroup
-  constructor(public modalController: ModalController, private casaService: CasaService, private storage: Storage, private router: Router, private imgPicker: ImagePicker, private publicacionService: PublicacionService, private toastController: ToastController, private file: File, private formBuilder: FormBuilder) {
 
-  }
+  constructor(
+    public modalController: ModalController,
+    private casaService: CasaService,
+    private storage: Storage,
+    private router: Router,
+    private imgPicker: ImagePicker,
+    private publicacionService: PublicacionService,
+    private toastController: ToastController,
+    private file: File,
+    private formBuilder: FormBuilder
+  ) { }
+
   ngOnInit() {
     this.buildForm();
-  }
-  cambiarCasa(value) {
-    this.casa = value
-    console.log(this.casa);
 
+  }
+
+  cambiarCasa(value) {
+    this.casa = value;
+    console.log(this.casa);
   }
   cambiarTipo(value) {
     this.tipo = value;
   }
+
   cargarCasas() {
-    console.log(this.usuario);
     this.casaService.getsByUser(this.usuario.id).subscribe((c) => {
-      this.casas = c
+      this.casas = c;
     });
   }
+
   async abrirRegistro() {
     const modal = await this.modalController.create({
       component: RegistroCasaPage,
     });
     return await modal.present();
   }
+
   volver() {
     return this.router.dispose;
   }
-  async getUser() {
-    await this.cargarUsuario();
-    return this.currentUserSubject.asObservable();
-  }
+
   private buildForm() {
     this.publicacion = new Publicacion();
     this.publicacion.usuario = new Usuario();
@@ -74,69 +85,34 @@ export class PublicacionCasaPage implements OnInit {
     this.getUser().then((u) => {
       u.subscribe((r) => {
         this.publicacion.usuario = r;
-        this.usuario = r
-        console.log(r)
+        this.usuario = r;
       });
     });
     this.formGroup = this.formBuilder.group({
       titulo: [this.publicacion.titulo, Validators.required],
       detalle: [this.publicacion.detalle, Validators.required],
-    })
+    });
   }
+
   get control() {
     return this.formGroup.controls;
   }
-  consultarUsuario() {
-    this.storage.get('usuarioLogeado').then((u) => {
+
+  async getUser() {
+    await this.cargarUsuario();
+    return this.currentUserSubject.asObservable();
+  }
+
+  async cargarUsuario() {
+    await this.storage.get('usuarioLogeado').then((u: Usuario) => {
       this.usuario = u;
     });
-    console.log(this.usuario);
-    return this.usuario;
+
+    if (this.usuario) {
+      this.currentUserSubject = new BehaviorSubject<Usuario>(this.usuario);
+      this.cargarCasas();
+    }
   }
-  async cargarUsuario() {
-    const usuario = await this.storage.get('usuarioLogeado');
-    if (usuario) {
-      this.currentUserSubject = new BehaviorSubject<Usuario>(usuario);
-    }
-    return;
-  }
-  /*
-    consultarUsuario() {
-      let usuario = new Usuario()
-      usuario.id = '123';
-      usuario.apellido = "Pontón";
-      usuario.nombre = "Kevin"
-      usuario.correo = " kvin@gmail.com"
-      usuario.fechaNacimiento = new Date("06/11/2000");
-      usuario.telefono = "3102999911";
-      usuario.casas = this.construirListaCasas();
-      return usuario;
-    }
-    construirListaCasas() {
-      let casas =
-        [{
-          barrio: "Mareiga",
-          ciudad: "Valledupar",
-          departamento: "Cesar",
-          direccion: "Calle 64 # 02 - 1",
-          numeroDeBanos: "5",
-          numeroDeCuartos: "6",
-          idPropietario: "123",
-          tipo: "Venta",
-          propietario: {
-            apellido: "Pontón",
-            nombre: "Kevin",
-            correo: "Kevin@gmail.com",
-            fechaNacimiento: this.fecha,
-            id: "123",
-            telefono: "3121111133",
-            casas: []
-          },
-        }
-        ]
-      return casas
-    }
-    */
 
   slideChanged() {
     this.slides.getActiveIndex().then(index => {
@@ -147,6 +123,7 @@ export class PublicacionCasaPage implements OnInit {
     this.activeIndex = i;
     this.slides.slideTo(this.activeIndex);
   }
+
   slideOpts = {
     on: {
       beforeInit() {

@@ -23,14 +23,14 @@ export class PublicacionService {
     publicacion.imagenes = this.darIdAImagenes(publicacion.imagenes, publicacion.id);
     console.log(publicacion.imagenes);
     console.log(publicacion)
-    return this.http.post<Publicacion>(this.baseUrl + "/api/Publicacion", publicacion).pipe(
+    return this.http.post<Publicacion>(this.baseUrl + "/Publicacion", publicacion).pipe(
       tap((_) => this.updateWhenSaved(),
       ),
     );
   }
 
   getByType(tipo: string) {
-    const url = `${this.baseUrl}/api/PublicacionTipo/${tipo}`
+    const url = `${this.baseUrl}/PublicacionTipo/${tipo}`;
     return this.http.get<Publicacion[]>(url).pipe(
       tap((p) => {
         this.publicaciones = p;
@@ -40,7 +40,7 @@ export class PublicacionService {
   }
 
   getsBySearch(search: string){
-    const url = `${this.baseUrl}/api/PublicacionSearch/${search}`;
+    const url = `${this.baseUrl}/PublicacionSearch/${search}`;
     return this.http.get<Publicacion[]>(url).pipe(
       tap((p) => {
         this.publicaciones = p;
@@ -59,7 +59,7 @@ export class PublicacionService {
     console.log("Publicacion guardada exitosamente")
   }
   gets() {
-    return this.http.get<Publicacion[]>(this.baseUrl + 'api/Publicacion').pipe(
+    return this.http.get<Publicacion[]>(this.baseUrl + '/Publicacion').pipe(
       tap((p) => {
         this.publicaciones = p
         console.log(this.publicaciones);
@@ -67,13 +67,13 @@ export class PublicacionService {
     )
   }
   edit(id: string, publicacion: Publicacion) {
-    const url = `${this.baseUrl}/api/Publicacion/${id}`
+    const url = `${this.baseUrl}/Publicacion/${id}`
     return this.http.put<Publicacion>(url, publicacion).pipe(
       tap((_) => console.log("Publicacion editada")
       ));
   }
   delete(id: string) {
-    const url = `${this.baseUrl}/api/Publicacion/${id}`
+    const url = `${this.baseUrl}/Publicacion/${id}`
     return this.http.delete<Publicacion>(url).pipe(
       tap((_) => console.log("Publicacion eliminada")
       )

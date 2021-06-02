@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,18 +13,29 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  usuario: Usuario
-  USUARIOID: string = '1HM9RAKU3C76FK'
-  constructor(private modalController: ModalController, private usuarioService: UsuarioService, private storage: Storage) { }
+
+  usuario: Usuario;
+  USUARIOID = 'MLIT5MEH1GFMAT';
+
+  constructor(
+    private modalController: ModalController,
+    private usuarioService: UsuarioService,
+    private storage: Storage,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
 
+  existeUsuarioLogeado(): void {
+    if (this.storage.get('usuarioLogeado')) {
+      this.router.navigate(['/tabs']);
+    }
   }
 
   async onLogin() {
-    this.consultarUsuario()
+    this.consultarUsuario();
   }
-
 
   async onRegistrar() {
     const modal = await this.modalController.create({
@@ -32,6 +44,7 @@ export class LoginPage implements OnInit {
     });
     modal.present();
   }
+
   consultarUsuario() {
     this.usuarioService.get(this.USUARIOID).subscribe((u) => {
       this.usuario = u;

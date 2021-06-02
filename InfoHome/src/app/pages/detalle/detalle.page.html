@@ -1,4 +1,4 @@
-<app-header-back-button titulo=""></app-header-back-button>
+<!--<app-header-back-button titulo=""></app-header-back-button>
 <ion-content class="ion-padding">
   <app-slideshow-details-images [imagenes]=publicacion.imagenes></app-slideshow-details-images>
   <ion-item lines="none">
@@ -8,24 +8,86 @@
     <h3>{{publicacion.detalle}}</h3>
   </ion-text>
   <ion-grid fixed>
-    <ion-row>
-      <ion-col size="6">
+    <div>
+      <div size="6">
         <ion-item lines="none">
           <ion-icon size="large" name="rainy-outline"></ion-icon>
         </ion-item>
         <ion-item lines="none">
           <h4>{{publicacion.casa.numeroDeBanos}}</h4>
         </ion-item>
-      </ion-col>
-      <ion-col size="6">
+      </div>
+      <div size="6">
         <ion-item lines="none">
           <ion-icon size="large" name="bed-outline"></ion-icon>
         </ion-item>
         <ion-item lines="none">
           <h4>{{publicacion.casa.numeroDeCuartos}}</h4>
         </ion-item>
-      </ion-col>
-    </ion-row>
+      </div>
+    </div>
   </ion-grid>
+</ion-content>
+-->
 
+
+<ion-content>
+  <div class="header">
+    <ion-buttons>
+      <ion-button>
+        <ion-icon slot="icon-only" color="light" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons>
+      <ion-button>
+        <ion-icon slot="icon-only" color="light" name="heart-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+
+  <!-- Detalle -->
+  <div class="card">
+    <div class="image">
+      <ion-img [src]="publicacion.imagenes[0].valor"></ion-img>
+    </div>
+
+    <div class="card-content">
+      <div class="card-title">
+        <h1 class="ion-no-margin"> {{ publicacion.titulo }} </h1>
+        <p class="tipo">{{ publicacion.tipo }} <sup>$</sup>400.000</p>
+      </div>
+    </div>
+
+    <div class="caracteristicas">
+      <div class="caracteristica">
+        <ion-icon name="add"></ion-icon>  {{ publicacion.casa.numeroDeBanos }}
+      </div>
+      <div class="caracteristica">
+        <ion-icon name="add"></ion-icon>  {{ publicacion.casa.numeroDeCuartos }}
+      </div>
+    </div>
+
+    <div class="propietario">
+      <h1>Propietario</h1>
+      <p>Nombre: {{publicacion.casa.propietario.nombre}}</p>
+      <p>Celular: {{publicacion.casa.propietario.telefono}}</p>
+      <p>Correo: {{publicacion.casa.propietario.correo}}</p>
+    </div>
+
+    <div class="localizacion">
+      <h1> Localización</h1>
+      <li>
+        {{publicacion.casa.ciudad}}, {{publicacion.casa.departamento}}
+      </li>
+      <li>
+        {{publicacion.casa.barrio}}, {{publicacion.casa.direccion}}
+      </li>
+    </div>
+
+    <div class="acerca-de">
+      <h1>Acerca de</h1>
+      <p> {{ publicacion.detalle }}</p>
+    </div>
+  </div>
 </ion-content>

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  connectionString: 'https://infohomeapiv9.azurewebsites.net/',
+  connectionString: 'https://localhost:5001/api',
 };
 
 /*

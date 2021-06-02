@@ -7,7 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./detalle.page.scss'],
 })
 export class DetallePage implements OnInit {
-  @Input() publicacion: Publicacion
+
+  @Input() publicacion: Publicacion;
+
   constructor() { }
 
   ngOnInit() {

@@ -6033,19 +6033,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kevin\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\InfoHome\\infohomebackend\\infohomeapi\\InfoHomeApi.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\InfoHome\\InfoHomeBackend\\InfoHomeApi\\InfoHomeApi.csproj",
       "projectName": "InfoHomeApi",
-      "projectPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\InfoHome\\infohomebackend\\infohomeapi\\InfoHomeApi.csproj",
-      "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\InfoHome\\infohomebackend\\infohomeapi\\obj\\",
+      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\InfoHome\\InfoHomeBackend\\InfoHomeApi\\InfoHomeApi.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Documents\\GitHub\\InfoHome\\InfoHomeBackend\\InfoHomeApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kevin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6059,11 +6059,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\InfoHome\\infohomebackend\\Entity\\Entity.csproj": {
-              "projectPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\InfoHome\\infohomebackend\\Entity\\Entity.csproj"
+            "C:\\Users\\User\\Documents\\GitHub\\InfoHome\\InfoHomeBackend\\Entity\\Entity.csproj": {
+              "projectPath": "C:\\Users\\User\\Documents\\GitHub\\InfoHome\\InfoHomeBackend\\Entity\\Entity.csproj"
             },
-            "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\InfoHome\\infohomebackend\\Service\\Service.csproj": {
-              "projectPath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\InfoHome\\infohomebackend\\Service\\Service.csproj"
+            "C:\\Users\\User\\Documents\\GitHub\\InfoHome\\InfoHomeBackend\\Service\\Service.csproj": {
+              "projectPath": "C:\\Users\\User\\Documents\\GitHub\\InfoHome\\InfoHomeBackend\\Service\\Service.csproj"
             }
           }
         }
@@ -6101,7 +6101,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

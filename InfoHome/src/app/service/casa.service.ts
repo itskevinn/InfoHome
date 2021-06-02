@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment.prod';
+import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
@@ -16,7 +16,7 @@ export class CasaService {
   ) { this.baseUrl = environment.connectionString }
 
   save(casa: Casa) {
-    return this.http.post<Casa>(this.baseUrl + "api/Casa", casa).pipe(
+    return this.http.post<Casa>(this.baseUrl + "/Casa", casa).pipe(
       tap((_) => {
         this.updateWhenSaved();
       }),
@@ -27,12 +27,12 @@ export class CasaService {
     console.log("Casa guardada exitosamente")
   }
   gets() {
-    return this.http.get<Casa[]>(this.baseUrl + 'api/Casa').pipe(
+    return this.http.get<Casa[]>(this.baseUrl + '/Casa').pipe(
       tap((p) => this.casas = p)
     )
   }
   get(id: string) {
-    const url = `${this.baseUrl}api/Casa/${id}`
+    const url = `${this.baseUrl}/Casa/${id}`
     return this.http.get<Casa>(url).pipe(
       tap((r) => {
         this.casa = r;
@@ -43,7 +43,7 @@ export class CasaService {
 
   getsByUser(id: string) {
     console.log(id);
-    const url = `${this.baseUrl}api/CasaUsuario/${id}`
+    const url = `${this.baseUrl}/CasaUsuario/${id}`
     return this.http.get<Casa[]>(url).pipe(
       tap((r) => {
         this.casas = r
@@ -51,13 +51,13 @@ export class CasaService {
     );
   }
   edit(id: string, casa: Casa) {
-    const url = `${this.baseUrl}api/Casa/${id}`
+    const url = `${this.baseUrl}/Casa/${id}`
     return this.http.put<Casa>(url, casa).pipe(
       tap((_) => console.log("Casa editada")
       ));
   }
   delete(id: string) {
-    const url = `${this.baseUrl}api/Casa/${id}`
+    const url = `${this.baseUrl}/Casa/${id}`
     return this.http.delete<Casa>(url).pipe(
       tap((_) => console.log("Casa eliminada")
       )
