@@ -1,0 +1,12 @@
+<ion-list>
+  <ion-item (click)="verDetalle(publicacion)" *ngFor="let publicacion of publicaciones">
+    <app-cards-casa [publicacion]=publicacion></app-cards-casa>
+  </ion-item>
+</ion-list>
+
+<ion-infinite-scroll threshold="200px" (ionInfinite)="loadData($event)">
+  <ion-infinite-scroll-content
+    loadingSpinner="lines"
+    loadingText="Cargando...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>

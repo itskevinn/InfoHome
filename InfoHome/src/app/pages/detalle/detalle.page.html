@@ -1,4 +1,11 @@
-<app-header-back-button titulo=""></app-header-back-button>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-button slot="end" (click)="close()" fill="clear">
+      <ion-icon slot="start" color="dark" name="close"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content class="ion-padding">
   <app-slideshow-details-images [imagenes]=publicacion.imagenes></app-slideshow-details-images>
   <ion-item lines="none">

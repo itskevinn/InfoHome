@@ -1,6 +1,7 @@
 <ion-header class="ion-no-border" [translucent]="true">
   <ion-toolbar>
-    <ion-button color="success" class="new-button" size="small" slot="end" fill="solid" shape="round" routerLink='/Publicacion'>
+    <ion-button color="success" class="new-button" size="small" slot="end" fill="solid" shape="round"
+                routerLink='/Publicacion'>
       Publicar
     </ion-button>
     <ion-title class="titulo-tab" size="large" slot="start">
@@ -12,8 +13,5 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-label class="titulo-inicio">Arriendos</ion-label>
-  <app-slideshow-backdrop [publicaciones]="this.publicacionesEnArriendo"></app-slideshow-backdrop>
-  <ion-label class="titulo-inicio">Casas en venta</ion-label>
-  <app-slideshow-backdrop [publicaciones]="this.publicacionesEnVenta"></app-slideshow-backdrop>
+  <app-slide-tipo-publicacion></app-slide-tipo-publicacion>
 </ion-content>

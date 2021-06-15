@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "j6La4sF3PhJsbdnP+5X0Qj8+VwG60iOU1aNyPhrict1l8eMgDDH58TCrzXBbFnmfmQ/IpkaEYNi9pE0i0ZvPFg==",
+  "dgSpecHash": "a+d8/oTEst7U93Ocd96b0QgwXwN751hwNlyzKr4JOl9F+8pRbgcXfY6sDVc0w/cnA9eIq8cCcGUFOYFzoYsPGA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\InfoHome\\infohomebackend\\Entity\\Entity.csproj",
+  "projectFilePath": "C:\\Users\\kevin\\OneDrive\\Documentos\\GitHub\\InfoHome\\InfoHomeBackend\\Entity\\Entity.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
