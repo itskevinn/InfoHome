@@ -31,7 +31,7 @@ export class CasaService {
   }
 
   gets() {
-    return this.http.get<Casa[]>(this.baseUrl + '/Casa').pipe(
+    return this.http.get<Casa[]>(this.baseUrl + 'api/Casa').pipe(
       tap((p) => this.casas = p)
     );
   }

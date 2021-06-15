@@ -1,19 +1,18 @@
-import { CasaService } from 'src/app/service/casa.service';
-import { BehaviorSubject } from 'rxjs';
-import { RegistroCasaPage } from './../registro-casa/registro-casa.page';
-import { Imagen } from './../../interfaces/imagen';
-import { PublicacionService } from './../../service/publicacion.service';
-import { Publicacion } from './../../interfaces/publicacion';
-import { Usuario } from './../../interfaces/usuario';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { File } from '@ionic-native/file/ngx';
-import { IonSlides, ToastController, ModalController } from '@ionic/angular';
-import { Router } from '@angular/router';
-import { Casa } from 'src/app/interfaces/casa';
-import { Storage } from '@ionic/storage';
-import { UsuarioService } from 'src/app/service/usuario.service';
+import {CasaService} from 'src/app/service/casa.service';
+import {BehaviorSubject} from 'rxjs';
+import {RegistroCasaPage} from './../registro-casa/registro-casa.page';
+import {Imagen} from './../../interfaces/imagen';
+import {PublicacionService} from './../../service/publicacion.service';
+import {Publicacion} from './../../interfaces/publicacion';
+import {Usuario} from './../../interfaces/usuario';
+import {ImagePicker, ImagePickerOptions} from '@ionic-native/image-picker/ngx';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {File} from '@ionic-native/file/ngx';
+import {IonSlides, ToastController, ModalController} from '@ionic/angular';
+import {Router} from '@angular/router';
+import {Casa} from 'src/app/interfaces/casa';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-publicacion-casa',
@@ -22,109 +21,34 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 })
 export class PublicacionCasaPage implements OnInit {
 
-  @ViewChild('slides', { static: true }) slides: IonSlides;
-  activeIndex: number = 0
-  publicacion: Publicacion
-  imagen: Imagen
-  imagenes: Imagen[] = []
-  usuario: Usuario;
-  tipo: string
-  tipos: string[] = ["Arriendo", "Venta"]
-  casas: Casa[] = [];
-  casa: Casa
-  currentUserSubject: any
-  fecha = new Date()
-  formGroup: FormGroup
-
-  constructor(
-    public modalController: ModalController,
-    private casaService: CasaService,
-    private storage: Storage,
-    private router: Router,
-    private imgPicker: ImagePicker,
-    private publicacionService: PublicacionService,
-    private toastController: ToastController,
-    private file: File,
-    private formBuilder: FormBuilder
-  ) { }
-
-  ngOnInit() {
-    this.buildForm();
-
-  }
-
-  cambiarCasa(value) {
-    this.casa = value;
-    console.log(this.casa);
-  }
-  cambiarTipo(value) {
-    this.tipo = value;
-  }
-
-  cargarCasas() {
-    this.casaService.getsByUser(this.usuario.id).subscribe((c) => {
-      this.casas = c;
-    });
-  }
-
-  async abrirRegistro() {
-    const modal = await this.modalController.create({
-      component: RegistroCasaPage,
-    });
-    return await modal.present();
-  }
-
-  volver() {
-    return this.router.dispose;
-  }
-
-  private buildForm() {
-    this.publicacion = new Publicacion();
-    this.publicacion.usuario = new Usuario();
-    this.publicacion.titulo = '';
-    this.publicacion.detalle = '';
-    this.getUser().then((u) => {
-      u.subscribe((r) => {
-        this.publicacion.usuario = r;
-        this.usuario = r;
-      });
-    });
-    this.formGroup = this.formBuilder.group({
-      titulo: [this.publicacion.titulo, Validators.required],
-      detalle: [this.publicacion.detalle, Validators.required],
-      tipo: [this.publicacion.tipo, Validators.required]
-    });
+  constructor(public modalController: ModalController,
+              private casaService: CasaService,
+              private storage: Storage,
+              private router: Router,
+              private imgPicker: ImagePicker,
+              private publicacionService: PublicacionService,
+              private toastController: ToastController,
+              private file: File,
+              private formBuilder: FormBuilder) {
   }
 
   get control() {
     return this.formGroup.controls;
   }
 
-  async getUser() {
-    await this.cargarUsuario();
-    return this.currentUserSubject.asObservable();
-  }
-
-  async cargarUsuario() {
-    await this.storage.get('usuarioLogeado').then((u: Usuario) => {
-      this.usuario = u;
-    });
-
-    if (this.usuario) {
-      this.currentUserSubject = new BehaviorSubject<Usuario>(this.usuario);
-      this.cargarCasas();
-    }
-  }
-
-  slideChanged() {
-    this.slides.getActiveIndex().then(index => {
-      this.activeIndex = index
-    });
-  }
-  cambiarIndex(i: number) {
-    this.activeIndex = i;
-    this.slides.slideTo(this.activeIndex);
-  }
+  @ViewChild('slides', {static: true}) slides: IonSlides;
+  activeIndex = 0;
+  publicacion: Publicacion;
+  imagen: Imagen;
+  imagenes: Imagen[] = [];
+  usuario: Usuario;
+  tipo: string;
+  tipos: string[] = ['Arriendo', 'Venta'];
+  casas: Casa[];
+  casa: Casa;
+  currentUserSubject: any;
+  fecha = new Date();
+  formGroup: FormGroup;
 
   slideOpts = {
     on: {
@@ -145,7 +69,7 @@ export class PublicacionCasaPage implements OnInit {
       },
       setTranslate() {
         const swiper = this;
-        const { $, slides, rtlTranslate: rtl } = swiper;
+        const {$, slides, rtlTranslate: rtl} = swiper;
         for (let i = 0; i < slides.length; i += 1) {
           const $slideEl = slides.eq(i);
           let progress = $slideEl[0].progress;
@@ -196,7 +120,7 @@ export class PublicacionCasaPage implements OnInit {
       },
       setTransition(duration) {
         const swiper = this;
-        const { slides, activeIndex, $wrapperEl } = swiper;
+        const {slides, activeIndex, $wrapperEl} = swiper;
         slides
           .transition(duration)
           .find('.swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left')
@@ -224,6 +148,88 @@ export class PublicacionCasaPage implements OnInit {
       }
     }
   };
+
+  ngOnInit() {
+    this.buildForm();
+  }
+
+  cambiarCasa(value) {
+    this.casa = value;
+    console.log(this.casa);
+
+  }
+
+  cambiarTipo(value) {
+    this.tipo = value;
+  }
+
+  cargarCasas() {
+    console.log(this.usuario);
+    this.casaService.getsByUser(this.usuario.id).subscribe((c) => {
+      this.casas = c;
+    });
+  }
+
+  async abrirRegistro() {
+    const modal = await this.modalController.create({
+      component: RegistroCasaPage,
+    });
+    return await modal.present();
+  }
+
+  volver() {
+    return this.router.dispose;
+  }
+
+  async getUser() {
+    await this.cargarUsuario();
+    return this.currentUserSubject.asObservable();
+  }
+
+  private buildForm() {
+    this.publicacion = new Publicacion();
+    this.publicacion.usuario = new Usuario();
+    this.publicacion.titulo = '';
+    this.publicacion.detalle = '';
+    this.getUser().then((u) => {
+      u.subscribe((r) => {
+        this.publicacion.usuario = r;
+        this.usuario = r;
+        console.log(r);
+      });
+    });
+    this.formGroup = this.formBuilder.group({
+      titulo: [this.publicacion.titulo, Validators.required],
+      detalle: [this.publicacion.detalle, Validators.required],
+    });
+  }
+
+  consultarUsuario() {
+    this.storage.get('usuarioLogeado').then((u) => {
+      this.usuario = u;
+    });
+    console.log(this.usuario);
+    return this.usuario;
+  }
+
+  async cargarUsuario() {
+    const usuario = await this.storage.get('usuarioLogeado');
+    if (usuario) {
+      this.currentUserSubject = new BehaviorSubject<Usuario>(usuario);
+    }
+    return;
+  }
+
+  slideChanged() {
+    this.slides.getActiveIndex().then(index => {
+      this.activeIndex = index;
+    });
+  }
+
+  cambiarIndex(i: number) {
+    this.activeIndex = i;
+    this.slides.slideTo(this.activeIndex);
+  }
 
   elegirVariasImagenes() {
     const options: ImagePickerOptions = {

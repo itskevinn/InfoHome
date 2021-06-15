@@ -86,7 +86,6 @@
           </ion-row>
         </ion-list>
       </ion-slide>
-
       <ion-slide style="margin-top: 40px !important;">
         <br>
         <ion-list>
@@ -94,27 +93,17 @@
             <ion-col size="12">
               <ion-label style="size: 22px !important; font-weight: 600;">¿Cuál casa deseas publicar?</ion-label>
             </ion-col>
-            <ion-col size="12">
-              <ion-item>
-                <ion-label>Seleccionar</ion-label>
-                <ion-select #vC (ionChange)="cambiarCasa(vC.value)" interface="popover" placeholder="Selecciona una">
-
-                  <ion-select-option *ngFor="let casa of casas" [value]="casa">
-                    {{casa.direccion}}
-                  </ion-select-option>
-
-                  <ion-select-option disabled>
-                    <ion-label *ngIf="casas.length === 0">No hay casas registradas</ion-label>
-                  </ion-select-option>
-
-                </ion-select>
-              </ion-item>
-            </ion-col>
+            <ion-select #vC (ionChange)="cambiarCasa(vC.value)" (click)="cargarCasas()" placeholder="Selecciona una">
+              <ion-select-option *ngFor="let casa of casas" [value]="casa">
+                {{casa.direccion}}
+              </ion-select-option>
+            </ion-select>
           </ion-row>
           <ion-row>
-            <ion-col style="margin-top: 40px !important;" size="12">
+            <ion-col size="12">
               <ion-label style="size: 22px !important; font-weight: 600;">¿No la encuentras?</ion-label>
-              <ion-button color="secondary" style="margin: 15px;" expand="block" (click)="abrirRegistro()" fill="solid" shape="round">
+              <ion-button color="light" expand="block" (click)="abrirRegistro()" fill="solid"
+                          shape="round">
                 Registrar una casa nueva
               </ion-button>
             </ion-col>

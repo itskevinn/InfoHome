@@ -2,7 +2,6 @@ import {CasaService} from 'src/app/service/casa.service';
 import {Publicacion} from './../../interfaces/publicacion';
 import {Component, OnInit, Input} from '@angular/core';
 import {Imagen} from 'src/app/interfaces/imagen';
-import { Usuario } from 'src/app/interfaces/usuario';
 
 @Component({
   selector: 'app-cards-casa',
@@ -13,24 +12,17 @@ export class CardsCasaComponent implements OnInit {
   @Input() publicacion: Publicacion;
   imagenes: Imagen[];
 
-  constructor(private casaService: CasaService, private storage: Storage) {
+  constructor(private casaService: CasaService) {
   }
 
   ngOnInit() {
     this.cargarCasa();
     this.cargarImagen();
-    this. cargarPropietario();
   }
 
   cargarCasa() {
     this.casaService.get(this.publicacion.idCasa).subscribe((c) => {
       this.publicacion.casa = c;
-    });
-  }
-
-  async cargarPropietario() {
-    await this.storage.get('usuarioLogeado').then((u: Usuario) => {
-      this.publicacion.casa.propietario = u;
     });
   }
 
