@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  connectionString: 'https://localhost:5001/api',
+  connectionString: 'https://localhost:5001/',
 };
 
 /*

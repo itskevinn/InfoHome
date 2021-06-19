@@ -1,13 +1,6 @@
 ionic cordova run browser
 backend
-Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;
-
-
-,
-  "AllowedHosts": "*",
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=tcp:infohome.database.windows.net,1433;Initial Catalog=infohome;Persist Security Info=False;User ID=Kevin;Password=Kevi.2!!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
-  }
+Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
 
 comandos migración
 dotnet tool install --global dotnet-ef
@@ -32,56 +25,4 @@ npm i @ionic-native/image-picker
 npm i @ionic-native/file
 npm i @ionic/storage-angular
 
-Error: Cannot find module '@angular-devkit/build-optimizer'
-Solucion: npm i --save-dev @angular-devkit/build-angular
-
 si sale error en los imports, tienes que colocarle /ngx
-
-/*
-    consultarUsuario() {
-      let usuario = new Usuario()
-      usuario.id = '123';
-      usuario.apellido = "Pontón";
-      usuario.nombre = "Kevin"
-      usuario.correo = " kvin@gmail.com"
-      usuario.fechaNacimiento = new Date("06/11/2000");
-      usuario.telefono = "3102999911";
-      usuario.casas = this.construirListaCasas();
-      return usuario;
-    }
-    construirListaCasas() {
-      let casas =
-        [{
-          barrio: "Mareiga",
-          ciudad: "Valledupar",
-          departamento: "Cesar",
-          direccion: "Calle 64 # 02 - 1",
-          numeroDeBanos: "5",
-          numeroDeCuartos: "6",
-          idPropietario: "123",
-          tipo: "Venta",
-          propietario: {
-            apellido: "Pontón",
-            nombre: "Kevin",
-            correo: "Kevin@gmail.com",
-            fechaNacimiento: this.fecha,
-            id: "123",
-            telefono: "3121111133",
-            casas: []
-          },
-        }
-        ]
-      return casas
-    }
-    */
-
-
-    ion-content {
-  ion-item {
-    ion-label {
-      margin-top: 15px !important;
-      font-weight: 800;
-      font-size: 30px;
-    }
-  }
-}

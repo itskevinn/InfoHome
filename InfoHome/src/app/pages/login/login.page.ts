@@ -1,11 +1,10 @@
-import { UsuarioService } from 'src/app/service/usuario.service';
-import { Usuario } from './../../interfaces/usuario';
-import { RegistroUsuarioPage } from './../registro-usuario/registro-usuario.page';
-import { Component, OnInit } from '@angular/core';
+import {UsuarioService} from 'src/app/service/usuario.service';
+import {Usuario} from './../../interfaces/usuario';
+import {RegistroUsuarioPage} from './../registro-usuario/registro-usuario.page';
+import {Component, OnInit} from '@angular/core';
 
-import { ModalController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
-import { Router } from '@angular/router';
+import {ModalController} from '@ionic/angular';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -13,29 +12,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
   usuario: Usuario;
-  USUARIOID = 'MLIT5MEH1GFMAT';
+  USUARIOID = 'S5ZDT0Y7665S3R';
 
-  constructor(
-    private modalController: ModalController,
-    private usuarioService: UsuarioService,
-    private storage: Storage,
-    private router: Router
-  ) { }
-
-  ngOnInit() {
+  constructor(private modalController: ModalController, private usuarioService: UsuarioService, private storage: Storage) {
   }
 
-  existeUsuarioLogeado(): void {
-    if (this.storage.get('usuarioLogeado')) {
-      this.router.navigate(['/tabs']);
-    }
+  ngOnInit() {
+
   }
 
   async onLogin() {
     this.consultarUsuario();
   }
+
 
   async onRegistrar() {
     const modal = await this.modalController.create({
