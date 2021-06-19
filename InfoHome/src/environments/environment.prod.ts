@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  connectionString: 'https://localhost:5001/'
+  connectionString: 'https://infohomeapiv9.azurewebsites.net/'
 };

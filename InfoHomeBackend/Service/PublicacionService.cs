@@ -129,6 +129,7 @@ namespace Service
       try
       {
         return _infoHomeContext.Publicaciones.Include((p) => p.Imagenes).Where((p) => p.Tipo == tipo).ToList();
+
       }
       catch (Exception)
       {

@@ -1,6 +1,5 @@
-import {Publicacion} from './../../interfaces/publicacion';
-import {Component, OnInit, Input} from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import { Publicacion } from './../../interfaces/publicacion';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-detalle',
@@ -8,15 +7,10 @@ import {ModalController} from '@ionic/angular';
   styleUrls: ['./detalle.page.scss'],
 })
 export class DetallePage implements OnInit {
-  @Input() publicacion: Publicacion;
-
-  constructor(private modalController: ModalController) {
-  }
+  @Input() publicacion: Publicacion
+  constructor() { }
 
   ngOnInit() {
   }
 
-  close() {
-    this.modalController.dismiss();
-  }
 }

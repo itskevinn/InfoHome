@@ -23,6 +23,7 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\Service\bin\D
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\Service\bin\Debug\net5.0\Entity.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\Service\bin\Debug\net5.0\Entity.pdb
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\Service\bin\Debug\net5.0\Data.pdb
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\Service\obj\Debug\net5.0\Service.csprojAssemblyReference.cache
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\Service\obj\Debug\net5.0\Service.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\Service\obj\Debug\net5.0\Service.AssemblyInfoInputs.cache
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\Service\obj\Debug\net5.0\Service.AssemblyInfo.cs
@@ -31,4 +32,3 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\Service\obj\D
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\Service\obj\Debug\net5.0\Service.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\Service\obj\Debug\net5.0\ref\Service.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\Service\obj\Debug\net5.0\Service.pdb
-C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\InfoHomeBackend\Service\obj\Debug\net5.0\Service.csproj.AssemblyReference.cache

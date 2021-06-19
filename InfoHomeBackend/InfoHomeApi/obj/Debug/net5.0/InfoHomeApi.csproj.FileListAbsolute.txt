@@ -121,6 +121,7 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\infohomeapi\b
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\infohomeapi\bin\Debug\net5.0\Entity.pdb
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\infohomeapi\bin\Debug\net5.0\Service.pdb
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\infohomeapi\bin\Debug\net5.0\Data.pdb
+C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\infohomeapi\obj\Debug\net5.0\InfoHomeApi.csprojAssemblyReference.cache
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\infohomeapi\obj\Debug\net5.0\InfoHomeApi.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\infohomeapi\obj\Debug\net5.0\InfoHomeApi.AssemblyInfoInputs.cache
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\infohomeapi\obj\Debug\net5.0\InfoHomeApi.AssemblyInfo.cs
@@ -136,4 +137,3 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\infohomeapi\o
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\infohomeapi\obj\Debug\net5.0\ref\InfoHomeApi.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\infohomeapi\obj\Debug\net5.0\InfoHomeApi.pdb
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\infohomebackend\infohomeapi\obj\Debug\net5.0\InfoHomeApi.genruntimeconfig.cache
-C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\InfoHomeBackend\InfoHomeApi\obj\Debug\net5.0\InfoHomeApi.csproj.AssemblyReference.cache

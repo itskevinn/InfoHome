@@ -66,5 +66,33 @@ namespace InfoHomeBackend.InfoHomeApi.Controllers
       var casaViewModel = new CasaViewModel(casa);
       return casaViewModel;
     }
+    /* [HttpPut("{id}")]
+     public ActionResult<string> Put(Publicacion publicacion, string id)
+     {
+       var publicacionAEditar = _casaService.Consultar(id);
+       if (publicacionAEditar == null)
+       {
+         return BadRequest("No se encontró la publicación");
+       }
+       else
+       {
+         var mensaje = _casaService.Editar(publicacion).Mensaje;
+         return Ok(mensaje);
+       }
+     }
+     [HttpDelete("{id}")]
+     public ActionResult<string> Delete(string id)
+     {
+       var publicacionAEliminar = _casaService.Consultar(id);
+       if (publicacionAEliminar == null)
+       {
+         return BadRequest("Publicación no econtrada");
+       }
+       else
+       {
+         var mensaje = _casaService.Eliminar(id).Mensaje;
+         return Ok(mensaje);
+       }
+     }*/
   }
 }

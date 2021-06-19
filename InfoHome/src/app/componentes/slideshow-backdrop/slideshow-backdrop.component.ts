@@ -1,8 +1,8 @@
-import {DetallePage} from './../../pages/detalle/detalle.page';
+import { DetallePage } from './../../pages/detalle/detalle.page';
 
-import {Publicacion} from './../../interfaces/publicacion';
-import {Component, OnInit, Input} from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import { Publicacion } from './../../interfaces/publicacion';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-slideshow-backdrop',
@@ -10,15 +10,13 @@ import {ModalController} from '@ionic/angular';
   styleUrls: ['./slideshow-backdrop.component.scss'],
 })
 export class SlideshowBackdropComponent implements OnInit {
-  @Input() publicaciones: Publicacion[] = [];
-
+  @Input() publicaciones: Publicacion[] = []
   /**
    *
    */
   constructor(private modalController: ModalController) {
 
   }
-
   slideOpts = {
     slidesPerView: 1,
     coverflowEffect: {
@@ -64,21 +62,11 @@ export class SlideshowBackdropComponent implements OnInit {
           let translateX = isHorizontal ? params.stretch * (offsetMultiplier) : 0;
 
           // Fix for ultra small values
-          if (Math.abs(translateX) < 0.001) {
-            translateX = 0;
-          }
-          if (Math.abs(translateY) < 0.001) {
-            translateY = 0;
-          }
-          if (Math.abs(translateZ) < 0.001) {
-            translateZ = 0;
-          }
-          if (Math.abs(rotateY) < 0.001) {
-            rotateY = 0;
-          }
-          if (Math.abs(rotateX) < 0.001) {
-            rotateX = 0;
-          }
+          if (Math.abs(translateX) < 0.001) translateX = 0;
+          if (Math.abs(translateY) < 0.001) translateY = 0;
+          if (Math.abs(translateZ) < 0.001) translateZ = 0;
+          if (Math.abs(rotateY) < 0.001) rotateY = 0;
+          if (Math.abs(rotateX) < 0.001) rotateX = 0;
 
           const slideTransform = `translate3d(${translateX}px,${translateY}px,${translateZ}px)  rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
@@ -96,12 +84,8 @@ export class SlideshowBackdropComponent implements OnInit {
               $shadowAfterEl = swiper.$(`<div class="swiper-slide-shadow-${isHorizontal ? 'right' : 'bottom'}"></div>`);
               $slideEl.append($shadowAfterEl);
             }
-            if ($shadowBeforeEl.length) {
-              $shadowBeforeEl[0].style.opacity = offsetMultiplier > 0 ? offsetMultiplier : 0;
-            }
-            if ($shadowAfterEl.length) {
-              $shadowAfterEl[0].style.opacity = (-offsetMultiplier) > 0 ? -offsetMultiplier : 0;
-            }
+            if ($shadowBeforeEl.length) $shadowBeforeEl[0].style.opacity = offsetMultiplier > 0 ? offsetMultiplier : 0;
+            if ($shadowAfterEl.length) $shadowAfterEl[0].style.opacity = (-offsetMultiplier) > 0 ? -offsetMultiplier : 0;
           }
         }
 
@@ -119,8 +103,7 @@ export class SlideshowBackdropComponent implements OnInit {
           .transition(duration);
       }
     }
-  };
-
+  }
   async verDetalle(publicacion: Publicacion) {
     const modal = await this.modalController.create({
       component: DetallePage,
@@ -128,10 +111,8 @@ export class SlideshowBackdropComponent implements OnInit {
         publicacion
       }
     });
-    await modal.present();
+    modal.present();
   }
-
-  ngOnInit() {
-  }
+  ngOnInit() { }
 }
 

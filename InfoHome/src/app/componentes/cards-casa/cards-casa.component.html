@@ -1,4 +1,4 @@
-<ion-card mode="ios" class="ion-margin">
+<ion-card mode="ios" style="border-radius: 30px;">
   <div *ngIf="publicacion.imagenes.length != 0; else noImage">
     <ion-img src="{{publicacion.imagenes[0].valor}}"></ion-img>
   </div>
@@ -9,6 +9,6 @@
   </ng-template>
   <ion-card-header class="ion-text-left">
     <ion-card-title class="ion-text-sm-left">{{publicacion.titulo}}</ion-card-title>
-    <ion-card-subtitle class="ion-text-sm-left">{{publicacion.casa.barrio}} - {{publicacion.tipo}}</ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-sm-left">{{publicacion.casa.barrio}}</ion-card-subtitle>
   </ion-card-header>
 </ion-card>
