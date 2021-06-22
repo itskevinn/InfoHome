@@ -10,3 +10,15 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\InfoHomeBackend\Entity\obj\Re
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\InfoHomeBackend\Entity\obj\Release\net5.0\Entity.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\InfoHomeBackend\Entity\obj\Release\net5.0\ref\Entity.dll
 C:\Users\kevin\OneDrive\Documentos\GitHub\InfoHome\InfoHomeBackend\Entity\obj\Release\net5.0\Entity.pdb
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\Entity\bin\Release\net5.0\Entity.deps.json
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\Entity\bin\Release\net5.0\Entity.dll
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\Entity\bin\Release\net5.0\ref\Entity.dll
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\Entity\bin\Release\net5.0\Entity.pdb
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\Entity\obj\Release\net5.0\Entity.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\Entity\obj\Release\net5.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\Entity\obj\Release\net5.0\Entity.AssemblyInfoInputs.cache
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\Entity\obj\Release\net5.0\Entity.AssemblyInfo.cs
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\Entity\obj\Release\net5.0\Entity.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\Entity\obj\Release\net5.0\Entity.dll
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\Entity\obj\Release\net5.0\ref\Entity.dll
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\Entity\obj\Release\net5.0\Entity.pdb

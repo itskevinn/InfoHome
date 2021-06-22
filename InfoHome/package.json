@@ -29,6 +29,7 @@
     "@ionic/angular": "^5.5.2",
     "@ionic/storage": "^3.0.4",
     "@ionic/storage-angular": "^3.0.6",
+    "cordova": "^10.0.0",
     "cordova-android": "9.1.0",
     "cordova-browser": "6.0.0",
     "rxjs": "~6.6.0",
@@ -72,18 +73,23 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-camera": {},
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
       "cordova-plugin-telerik-imagepicker": {},
       "cordova-plugin-file": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }

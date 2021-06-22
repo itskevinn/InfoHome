@@ -1,0 +1,3 @@
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\publish\Entity.dll
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\publish\Entity.deps.json
+C:\Users\User\Documents\GitHub\InfoHome\InfoHomeBackend\publish\Entity.pdb

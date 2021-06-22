@@ -36,7 +36,7 @@ export class CardsCasaComponent implements OnInit {
   }
 
   cargarImagen() {
-    this.imagenes = this.publicacion.imagenes
+    this.imagenes = this.publicacion.imagenes;
     console.log(this.imagenes);
   }
 }

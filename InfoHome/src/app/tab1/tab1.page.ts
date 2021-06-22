@@ -1,11 +1,7 @@
-import { PublicacionCasaPage } from './../pages/publicacion-casa/publicacion-casa.page';
-import { ModalController } from '@ionic/angular';
-import { Imagen } from './../interfaces/imagen';
-import { Usuario } from './../interfaces/usuario';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Publicacion } from '../interfaces/publicacion';
 import { PublicacionService } from '../service/publicacion.service';
-import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tab1',
@@ -13,7 +9,10 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
-  constructor(private modalController: ModalController, private publicacionService: PublicacionService) { }
+  constructor(
+    private publicacionService: PublicacionService,
+    private router: Router
+  ) { }
   fecha = new Date("06/11/2000")
   publicacionesEnVenta: Publicacion[] = []
   publicacionesEnArriendo: Publicacion[] = []
@@ -37,4 +36,10 @@ export class Tab1Page implements OnInit {
     this.recuperarPublicaciones();
     event.target.complete();
   }
+
+  publicar() {
+    this.router.navigate(['/Publicacion']);
+  }
+
+  favoritos() {}
 }

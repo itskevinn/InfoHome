@@ -1,8 +1,10 @@
 <ion-header class="ion-no-border" [translucent]="true">
   <ion-toolbar>
+    <!--
     <ion-button color="success" class="new-button" size="small" slot="end" fill="solid" shape="round" routerLink='/Publicacion'>
       Publicar
     </ion-button>
+    -->
     <ion-title class="titulo-tab" size="large" slot="start">
       InfoHome
     </ion-title>
@@ -12,8 +14,27 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-label class="titulo-inicio">Arriendos</ion-label>
-  <app-slideshow-backdrop [publicaciones]="this.publicacionesEnArriendo"></app-slideshow-backdrop>
-  <ion-label class="titulo-inicio">Casas en venta</ion-label>
-  <app-slideshow-backdrop [publicaciones]="this.publicacionesEnVenta"></app-slideshow-backdrop>
+  <div *ngIf="this.publicacionesEnVenta.length > 0 || this.publicacionesEnArriendo.length > 0">
+    <ion-label class="titulo-inicio">Arriendos</ion-label>
+    <app-slideshow-backdrop [publicaciones]="this.publicacionesEnArriendo"></app-slideshow-backdrop>
+    <ion-label class="titulo-inicio">Casas en venta</ion-label>
+    <app-slideshow-backdrop [publicaciones]="this.publicacionesEnVenta"></app-slideshow-backdrop>
+  </div>
+  <div *ngIf="this.publicacionesEnVenta.length == 0 && this.publicacionesEnArriendo.length == 0">
+    <ion-label>No hay registros...</ion-label>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="caret-up"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="publicar()" data-desc="Publicar">
+        <ion-icon name="create"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="favoritos()" data-desc="Favoritos">
+        <ion-icon name="heart"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>
